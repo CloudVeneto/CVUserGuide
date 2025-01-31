@@ -256,7 +256,7 @@ needed to access the Cloud gate machine (see :ref:`Network Access<NetworkAccess>
 
 
 
-Apply for other projects
+Apply for other (new or existing) projects
 ------------------------
 .. _ApplyForOtherProjects:
 
