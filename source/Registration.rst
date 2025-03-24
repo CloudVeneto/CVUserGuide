@@ -8,11 +8,19 @@ To be able to use the CloudVeneto service, first of all you need to
 apply for an account. The procedure to be followed is described in this
 chapter.
 
-Users who need to use INFN IT resources 
-must met the prerequisites specified in the following
-section before applying for an account on the CloudVeneto infrastructure.
-This always applies to users willing to be member of an INFN project, but also to some Unipd 
-projects which use some INFN resources (e.g. the network).
+
+.. NOTE::
+   Users who need to use INFN IT resources 
+   must met the prerequisites specified in the following
+   section before applying for an account on the CloudVeneto infrastructure.
+   This always applies to users willing to be member of an INFN project, but also to some Unipd 
+   projects which use some INFN resources (e.g. the network).
+
+
+   **This does NOT mean that you need to have multiple accounts to access multiple
+   projects**: if you already have a Unipd account, once you are compliant with
+   the INFN rules you can ask to be affiliated to INFN projects (as explained
+   in :ref:`Apply for other (new or existing) projects<ApplyForOtherProjects>`) with that account.
 
 
 Prerequisites for using INFN resources

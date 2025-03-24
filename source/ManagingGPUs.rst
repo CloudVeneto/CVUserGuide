@@ -119,18 +119,17 @@ the creation of a 'standard' virtual machine (see
 pay attention to use one of these special flavors:
 
 
-- **cloudveneto.18cores56GB25+40GB1V100**
+- **cloudveneto.18cores50GB25GB1V100**
 
   Flavor for an instance with 1 GPU Nvidia V100,
-  18 VCPUs, 56 GB of RAM, 25 GB of ephemeral
-  root disk space, 40 GB of extra ephemeral disk space.
+  18 VCPUs, 50 GB of RAM, 25 GB of ephemeral
+  root disk space.
 
 
-- **cloudveneto.36cores100GB25+80GB2V100**
+- **cloudveneto.36cores100GB25GB2V100**
 
   Flavor for an instance with 2 GPU Nvidia V100,
-  36 VCPUs, 100 GB of RAM, 25 GB of ephemeral root disk space,
-  80 GB of extra ephemeral disk space.
+  36 VCPUs, 100 GB of RAM, 25 GB of ephemeral root disk space.
 
 
 - **cloudveneto.15cores90GB25G+500GB1T4**
