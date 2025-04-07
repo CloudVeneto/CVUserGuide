@@ -1,10 +1,31 @@
 ..    include:: <isonum.txt>
 
 
-Creating Batch Clusters on the Cloud (deprecated)
-=================================================
+Creating Batch Clusters on the Cloud
+====================================
+	
 
-and with the next Openstack update to Caracalla, it will be not more available)
+The virtual machines provided by CloudVeneto can also be used to
+implement batch clusters where users can run their applications.
+
+
+Creating a personal SLURM cluster on CloudVeneto
+------------------------------------------------
+
+The BioMed community of the University of Padova kindly provided these
+instructions:
+
+https://github.com/BioComputingUP/elastic-slurm-in-openstack/
+
+which explain how to deploy a personal SLURM cluster on CloudVeneto resources.
+
+
+
+
+Creating an elastic HTCondor Batch Clusters on CloudVeneto (deprecated)
+-----------------------------------------------------------
+
+
 
    .. WARNING::
        **Decembre 12 2024: The functionality described in the section relies on a
@@ -15,16 +36,13 @@ and with the next Openstack update to Caracalla, it will be not more available)
 
 
 
-The virtual machines provided by CloudVeneto can also be used to
-implement batch clusters where users can run their applications (normal
-jobs or docker containers).
 
-In this chapter we explain how to implement a dynamic batch cluster
+In this section we explain how to implement a dynamic batch cluster
 based on `HTCondor <http://research.cs.wisc.edu/htcondor/manual/>`__ and
 elastiq using ECM.
 
 Intro: the idea
----------------
+^^^^^^^^^^^^^^^
 
 You create on the cloud a virtual machine that acts as a master for a
 dynamic batch system (implemented using HTCondor). When you create the
@@ -46,7 +64,7 @@ the slave nodes, get done, and eventually the slaves will be released.
     nodes.
 
 Creating Batch Clusters on the Cloud with HTCondor
---------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When you create the master, using the instructions reported in 
 :ref:`Creating Virtual Machines<creatingvms>`, you
