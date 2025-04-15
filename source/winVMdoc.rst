@@ -237,6 +237,72 @@ Proceed to enter a valid product key when prompted.
   If you don’t have a valid product key, you will need to acquire one through Microsoft or a licensed distributor.
 
 
+KMS License Activation (**Staff INFN Only**)
+--------------------------------------------
+
+.. NOTE ::
+   
+   **Only staff INFN users** are authorized to request a KMS (Key Management Service) license.
+   It is the user's responsibility to carefully read and understand the terms and conditions related to activating a KMS license on virtualized clients.
+   Failure to comply with the licensing terms may result in improper activation or violation of usage policies.
+
+
+* Usage Terms and Conditions:
+
+   https://web.infn.it/windows/index.php/licenze/windows-client-licenze-e-virtualizzazione
+
+* KMS Installation Instructions:
+      
+   https://web.infn.it/windows/index.php/istruzioni/17-kms-categoria
+
+   To activate Windows using the KMS server, follow these steps only if you are authorized and have a valid product key.
+
+   * Open Command Prompt as Administrator (Right-click on Command Prompt and select “Run as Administrator”)
+
+   * Run the following commands one by one:
+
+   ::
+
+      cscript \windows\system32\slmgr.vbs /ipk "ENTER-YOUR-PRODUCT-KEY-HERE"   #Replace "ENTER-YOUR-PRODUCT-KEY-HERE" with the specific product key for your Windows version.
+      cscript \windows\system32\slmgr.vbs /skms kms.infn.it
+      cscript \windows\system32\slmgr.vbs /ato
+
+These commands will:
+
+* Set the product key
+
+* Configure the KMS server to kms.infn.it
+
+* Attempt to activate Windows via the INFN KMS infrastructure
+
+
+Connecting to the Windows VM via Remote Desktop
+-----------------------------------------------
+
+Once the setup is complete and the instance is running, you can connect to the virtual machine using Remote Desktop (RDP).
+
+
+* Open the Remote Desktop Connection application on your local machine. In the Computer field, enter the IP address assigned to the VM and the username
+  
+  .. image:: ./images/Win10-RemoteDesktop.png
+   :align: center
+
+
+* Use the username and password of the local account you created during the Windows setup
+
+  .. image:: ./images/Win10-RemoteDesktopLogin.png
+   :align: center
+
+* Once connected, you will be able to interact with your Windows VM just like a physical machine.
+
+  .. image:: ./images/Win10-VMConnect.png
+   :align: center
+
+
+
+
+
+
 
 
 
