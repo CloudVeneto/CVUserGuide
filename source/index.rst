@@ -31,6 +31,7 @@ Contents:
    ManagingStorage
    Orchestration
    ManagingImages
+   winVMdoc
    CaaS
    ElasticCluster
    MicroPrimers

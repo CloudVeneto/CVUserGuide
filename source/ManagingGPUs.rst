@@ -37,6 +37,7 @@ the relevant instructions).
 The only exception is  for the 4 T4 GPUs with 15 CPU
 cores, that are usable also from the **PhysicsOfData-students** project.
 
+
 .. WARNING::
   Please note that the members of the **PhysicsOfData-students** project have the priority on the
   4 T4 GPUs each one coupled with 15 CPU cores.
