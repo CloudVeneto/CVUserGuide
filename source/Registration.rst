@@ -10,7 +10,7 @@ chapter.
 
 
 .. NOTE::
-   Users who need to use INFN IT resources 
+   Users who need to use INFN IT resources in CloudVeneto
    must met the prerequisites specified in the following
    section before applying for an account on the CloudVeneto infrastructure.
    This always applies to users willing to be member of an INFN project, but also to some Unipd 
@@ -27,6 +27,8 @@ Prerequisites for using INFN resources
 --------------------------------------
 .. _INFNReq:
 
+
+There are some specific requirements for the use of INFN resources in CloudVeneto.
 Users who need to use INFN IT resources must:
 
 - have a verified digital identity (LoA2) on INFN-AAI;
@@ -42,9 +44,9 @@ After this self-registration process, connect to the INFN-AAI User Portal at
 https://userportal.app.infn.it/ using your INFN-AAI account 
 to complete the digital identity registration. In this process you will
 have to choose where (the INFN site) you want to be identified, and
-the person that will have to approve your request (if you are a Unipd student 
+the person that will have to approve your request (**if you are a Unipd student 
 and you can't find your Professor among the proposed
-list of persons, please select 'Giannina Borgato').
+list of persons, please select 'Giannina Borgato'**).
 
 
 Documentation (unfortunately only in Italian) on this process
@@ -54,7 +56,7 @@ You will then be contacted by an INFN secretariat person for your identification
 
 To follow the "Corso di Sicurezza Informatica - BASE", please use
 `this link <https://elearning.infn.it/course/view.php?id=105>`__.
-**This course must be followed within 30 days after the registration.**
+**This course must be followed within 30 days after the registration in INFN-AAI.**
 
 
 .. NOTE::
@@ -62,14 +64,14 @@ To follow the "Corso di Sicurezza Informatica - BASE", please use
    These rules apply to users willing to be member of an INFN project, but 
    also
    to users who want to join a Unipd Physics Dept. related project using a
-   10.64.x.0/24 network (since this is a INFN network).
+   10.64.x.0/24 network (since this is a network managed by INFN).
 
 
 Apply for an account
 --------------------
 
-The registration procedure in the cloud is managed through the Horizon
-Openstack web service interface.
+The registration procedure in the cloud is managed through the 
+web service interface.
 
 Go to https://cloud-areapd.pd.infn.it/dashboard or
 https://cloudveneto.ict.unipd.it/dashboard in a browser. The following
@@ -87,14 +89,14 @@ The following page should appear:
 
 
 -  If you have an account on the INFN Authenticaton and
-   Authorization Infrastructure (INFN AAI) and therefore you have access
-   to the INFN portal, click on the INFN AAI logo and proceed with :ref:`Enrollment procedure through INFN AAI or UniPD SSO<Enrollment>`.
+   Authorization Infrastructure (INFN AAI),
+   click on the INFN AAI logo and proceed with :ref:`Enrollment procedure through INFN AAI or UniPD SSO<Enrollment>`.
 
 -  If you instead have an account on the UniPD Single Sign-On (SSO)
-   Infrastructure (e.g. you have a username @unipd.it or
-   @studenti.unipd.it), click on the UniPD logo and proceed with :ref:`Enrollment procedure through INFN AAI or UniPD SSO<Enrollment>`.
+   Infrastructure (e.g. you have a  @unipd.it or
+   @studenti.unipd.it email), click on the UniPD logo and proceed with :ref:`Enrollment procedure through INFN AAI or UniPD SSO<Enrollment>`.
 
--  If and only if you don't have neither an account on the INFN
+-  **If and only if** you don't have neither an account on the INFN
    Authenticaton and Authorization Infrastructure (INFN AAI) nor on the
    UniPD SSO, click on the last icon (the green one, with "Username"
    and "Password") and proceed with :ref:`Apply for an account using User and Password<ApplyUsingUserPasswd>`.
@@ -152,9 +154,9 @@ allocated to your project.
 
     The person who asks for the creation of a new project is
     automatically defined as the manager of this project, i.e. he/she
-    will have to manage the membership requests for this project. So the
+    will have to manage the membership requests for this project. So **the
     request to create a new project should be done by the relevant
-    experiment/group leader.
+    experiment/group leader**.
 
 
 When you have filled the form, please read the AUP that you need to
@@ -181,7 +183,7 @@ Apply for an account using Username and Password
 .. _ApplyUsingUserPasswd:
 
 
-If and only if you don't have an account on the UniPD SSO or INFN AAI,
+**If and only if** you don't have an account on the UniPD SSO or INFN AAI,
 click on the green icon on the right:
 
 .. image:: ./images/RegisterLocalAccount.png
@@ -239,9 +241,9 @@ allocated to your project.
 
     The person who asks for the creation of a new project is
     automatically defined as the manager of this project, i.e. he/she
-    will have to manage the membership requests for this project. So the
+    will have to manage the membership requests for this project. So **the
     request to create a new project should be done by the relevant
-    experiment/group leader.
+    experiment/group leader**.
 
 
 When you have filled the form, please read the AUP that you need to
@@ -292,8 +294,8 @@ Manage project membership requests (only for project managers)
 .. _ManageProjectMembershipRequests:
 
 If you are the manager of a project, you will receive membership
-requests for this project that you will have to manage (approving or
-refusing them).
+requests for this project. You will have to manage (approving or
+refusing) such requests.
 
 When a user applies to be member of a project that you manage, you will
 receive an e-mail such as this one:
@@ -352,8 +354,11 @@ list of users affiliated to your project will appear:
    :align: center
 
 
-From here you can also change the role of a specific user (by clicking
-on **Toggle Role**) from 'Project User' to 'Project manager' or viceversa.
+From here you can also manage the role of a specific user.
+You can ask the promotion of a user to prokect manager by clicking on **Propose admin**
+(the request will then have to be approved by the cloud administrators) or you can demote a project manager
+to project user (by clicking on **Demote user**).
+
 
 .. NOTE::
     If a user is promoted to Project manager, she will then be allowed
@@ -396,7 +401,7 @@ appear:
 
 If you click 'Yes' (i.e. if you would like to have your membership renewed), 
 the project renewal request
-will be sent to the project administrator(s) for approval (ad documented
+will be sent to the project administrator(s) for approval (as documented
 in the next section).
 
 
