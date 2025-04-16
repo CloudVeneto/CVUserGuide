@@ -34,7 +34,7 @@ Creating a keypair
 
 
 You can now proceed creating a key-pair. This is a secret key which
-will allow you to interact with your virtual machine once it is created.
+will allow you to interact with your virtual machines once they are created.
 This key should be handled with similar security to a password or an ssh
 key so it should only be stored in a secure directory such as a private
 area in your home folder.
@@ -75,7 +75,7 @@ Importing your keypair
 ----------------------
 
 You might already have an ssh key you use to remotely access machines, and
-you migt want to use this ssh key instead of creating a new one (as explained
+you migt want to use this ssh key **instead of creating a new one** (as explained
 in the previous section).
 
 
@@ -184,8 +184,6 @@ Password management
 -------------------
 .. _PasswordOnlyIf:
 
-Foreword
-^^^^^^^^
 
 .. WARNING ::
 
@@ -200,10 +198,9 @@ You need to use the procedure described in the following subsection **only if**:
    :ref:`Accessing the Cloud with command line tools<accessingthecloudthroughcli>`
    ).
 
-Setting/changing password
-^^^^^^^^^^^^^^^^^^^^^^^^^
 
-From the OpenStack dashboard click on your user's name (on the top),
+To set/change the password, 
+from the OpenStack dashboard click on your user's name (on the top),
 select **Settings** from the dropdown menu and then **Manage Password**.
 
 
@@ -322,94 +319,4 @@ authenticate. The OpenStack command line tools can then be used, e.g.:
     When you source the rc script you are asked for a password. If the
     password is wrong, you will be told (with a generic authentication
     error) only when you issue some OpenStack commands.
-
-Accessing the Cloud through the euca2ools EC2 command line tools (deprecated)
-----------------------------------------------------------------
-.. _AccessingtheCloudthroughEC2:
-
-
-
-   .. WARNING::
-       **Decembre 12 2024: The AWS EC2 compatible interface relies on a 
-       service (ec2-api) that is deprecated and won't be avalable anymore 
-       when we deploy the OpenStack Caracal release (this will likely be done in
-       the first                                                                     
-       months of 2025).**
-
-
-
-The CloudVeneto also exposes a AWS EC2 compatible interface, which is one
-of the de-facto standard for computational clouds.
-
-The *euca2ools* are command line tools that can be used to interact
-with an EC2 based cloud.
-
-You can install the *euca2ools* package on your dekstop as follows:
-
-CentOS / Fedora
-
-::
-
-      # yum install euca2ools
-
-Ubuntu / Debian
-
-::
-
-      # apt-get install euca2ools
-
-.. NOTE ::
-
-    INFN-Padova users can find the euca2ools installed on
-    *lx.pd.infn.it*.
-
-The euca2ools require a set of shell environment variables in order to
-run. These environment variables are different per project that you work
-on.
-
-If you log into the dashboard, you will find **API Access** under the
-**Project** menu on the left hand side.
-
-
-.. image:: ./images/download_rc.png
-   :align: center
-
-
-
-Select **Download OpenStack RC file** and then **EC2 Credentials** to download the zip file for
-your current project. This zip file will be downloaded from the browser.
-
-
-.. image:: ./images/download_rc_menu.png
-   :align: center
-
-This file should be saved onto the machine where you want to run the
-commands from, and unzipped into a private directory, e.g:
-
-::
-
-    $ unzip SgaraPrj1-x509.zip 
-    Archive:  SgaraPrj1-x509.zip
-     extracting: ec2rc.sh           
-
-*ec2rc.sh* gives the variables for accessing the Cloud with EC2 APIs. If
-you use a C shell based shell, you would need to adapt this using
-setenv.
-
-To test it, you can e.g. try the following:
-
-::
-
-    $ . ec2rc.sh 
-    $ euca-describe-instances -I ${EC2_ACCESS_KEY} -S ${EC2_SECRET_KEY} -U ${EC2_URL}
-    RESERVATIONr-xvwmks74ee1865a76440481cbcff08544c7d580adefault
-    INSTANCEi-3b49020eami-2cfcb026tinies-uno-1runningsgaravat-ctest0m1.tiny2018-03-02T12:56:32Znova10.1.1.10instance-storesg-3896bec1
-    INSTANCEi-ebc7c470ami-2cfcb026tinies-uno-2runningsgaravat-ctest1m1.tiny2018-03-02T12:56:32Znova10.1.1.6instance-storesg-3896bec1
-    INSTANCEi-bdd57278ami-2cfcb026tinies-uno-3runningsgaravat-ctest2m1.tiny2018-03-02T12:56:32Znova10.1.1.12instance-storesg-3896bec1
-    INSTANCEi-e5bc209cami-2cfcb026tinies-uno-4runningsgaravat-ctest3m1.tiny2018-03-02T12:56:32Znova10.1.1.17instance-storesg-3896bec1
-    INSTANCEi-afc80fcdami-2cfcb026tinies-uno-5runningsgaravat-ctest4m1.tiny2018-03-02T12:56:32Znova10.1.1.4instance-storesg-3896bec1
-    RESERVATIONr-zpz5dkpnee1865a76440481cbcff08544c7d580adefault
-    INSTANCEi-e93ef61cami-2cfcb026dasgara1-2running1m1.tiny2018-01-16T08:36:44Znova10.1.1.11instance-storesg-3896bec1
-    $ 
-
 
