@@ -1,10 +1,17 @@
 ..    include:: <isonum.txt>
 
-Step-by-Step Guide: Deploying a Windows VM
+Deploying and using Windows VMs
 ==========================================
-   
+
+
+
+
+Deploying a Windows VM: step-by-step guide
+------------------------------------------
+
+
 Select the Windows Image
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 .. _Windowsimages:
 
 
@@ -26,22 +33,22 @@ From the dropdown menu next to the image, select "Create Volume".
    :align: center
 
 
-Create the Volume
------------------
+Create the bootable volume
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-While creating the volume, fill in all required parameters.
+While creating the volume, fill in all the required parameters.
 Important: make sure to set the volume size to at least 35GB.
 (The system might allow smaller sizes, but Windows installation or updates may fail without enough space.)
 
 .. image:: ./images/Win10-CreateVolume.png
    :align: center
 
-Launch an Instance from the Volume
-----------------------------------
+Launch an instance from the bootable volume
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Once the volume has been created, it will appear under the Volumes section.
 Open the Actions dropdown next to the new volume and select "Launch as Instance".
-Configure the instance as needed (e.g., flavor, network, key pair).
+Configure the instance as needed (specifying the flavor, network, key pair, etc.).
 
 
 .. image:: ./images/Win10-LaunchInstance.png
@@ -49,7 +56,7 @@ Configure the instance as needed (e.g., flavor, network, key pair).
 
 
 Enable Remote Access via RDP - Setting Security groups(s)
----------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. _Setting Security group:
 
 To allow remote access to the Windows VM via RDP, you must configure a Security Group that includes a rule to allow inbound traffic on port 3389 (TCP).
@@ -65,13 +72,12 @@ This rule is already active in the image provided, but you must still assign the
 
 
 .. NOTE ::
-   Note: If additional ports need to be opened, remember that you must:
-   * Add the corresponding rule to the security group in OpenStack
-   * Allow the same port through the Windows firewall inside the VM
+   Note: If additional ports need to be opened, remember that you must add the corresponding rules to the security
+   group in OpenStack and allow the same ports through the Windows firewall inside the VM
 
 
 Initial Windows Setup via Console
----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Once the instance has been successfully created, you will have access to a running Windows VM.
 Navigate to the Console tab (alongside Overview, Interfaces, Log, Console, Action Log) to interact with the VM.
@@ -80,7 +86,7 @@ Navigate to the Console tab (alongside Overview, Interfaces, Log, Console, Actio
    :align: center
 
 Install and Configure Windows 10
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 From the console, you can begin the initial Windows 10 setup process. Follow the on-screen instructions:
 
 * Select the appropriate region
@@ -100,7 +106,7 @@ From the console, you can begin the initial Windows 10 setup process. Follow the
 
 
 License Agreement
------------------
+^^^^^^^^^^^^^^^^^
 
 Accept the Windows License Agreement when prompted.
 
@@ -108,18 +114,18 @@ Accept the Windows License Agreement when prompted.
    :align: center
 
 Installation Mode
------------------
-Choose the installation type that suits your needs. In most cases, you’ll continue with a standard installation.
+^^^^^^^^^^^^^^^^^
+Choose the installation type that suits your needs. A standard installation should be ok for most cases.
 
 .. image:: ./images/Win10-PersonalOrganization.png
    :align: center
 
 Set Up a User Account
----------------------
+^^^^^^^^^^^^^^^^^^^^^
    
-When prompted to add your account:
+When prompted add your account:
 
-* Select “Offline account” (unless you have a Microsoft account and prefer to use that)
+* Select “Offline account” (unless you have a Microsoft account and you prefer to use that)
 
   .. image:: ./images/Win10-AccountOffline.png
      :align: center
@@ -130,7 +136,7 @@ When prompted to add your account:
       :align: center
 
 Create a Local User Account
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Set a username and password for the local user account. 
 This will be the main credential used to log in to the VM.
 
@@ -142,16 +148,16 @@ This will be the main credential used to log in to the VM.
 
 
 Set Security Questions
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
-During the setup process, you’ll be asked to create three security questions. These are required for account recovery in case you forget your password.
-Choose questions and answers that are easy for you to remember but hard for others to guess.
+During the setup process, you’ll be asked to define three security questions. These are required for account recovery in case you forget your password.
+Choose the questions and answers that are easy for you to remember but hard for others to guess.
 
 .. image:: ./images/Win10-Questions.png
    :align: center
 
 Privacy and Permissions Settings
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You will be prompted to configure various Windows permissions and privacy settings. Review and choose according to your preferences:
 
@@ -193,8 +199,8 @@ You will be prompted to configure various Windows permissions and privacy settin
   .. image:: ./images/Win10-execution.png
      :align: center
 
-Finalizing Setup
-----------------
+Finalizing the Setup
+^^^^^^^^^^^^^^^^^^^^
 
 After completing these steps, Windows will finalize the setup.
 You’ll see a message like “Almost there…”.
@@ -209,7 +215,7 @@ Once finished, the system will boot into a fully operational Windows 10 environm
 
 
 Windows Activation
--------------------
+^^^^^^^^^^^^^^^^^^
 
 You may notice a watermark in the lower-right corner of the desktop saying:
 "Activate Windows. Go to Settings to activate Windows."
@@ -237,12 +243,12 @@ Proceed to enter a valid product key when prompted.
   If you don’t have a valid product key, you will need to acquire one through Microsoft or a licensed distributor.
 
 
-KMS License Activation (**Staff INFN Only**)
---------------------------------------------
+KMS License Activation (**INFN Staff Only**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. NOTE ::
    
-   **Only staff INFN users** are authorized to request a KMS (Key Management Service) license.
+   **Only INFN staff users** are authorized to request a KMS (Key Management Service) license.
    It is the user's responsibility to carefully read and understand the terms and conditions related to activating a KMS license on virtualized clients.
    Failure to comply with the licensing terms may result in improper activation or violation of usage policies.
 

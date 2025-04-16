@@ -26,12 +26,12 @@ Contents:
    Registration
    GettingStarted
    AdminVMs-nocontext
+   winVMdoc
    ManagingContainers
    ManagingGPUs
    ManagingStorage
    Orchestration
    ManagingImages
-   winVMdoc
    CaaS
    ElasticCluster
    MicroPrimers
