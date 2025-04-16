@@ -3,7 +3,7 @@ Overview of CloudVeneto
 
 .. _tt:
 
-**CloudVeneto** is an OpenStack-based cloud.
+**CloudVeneto** is a private Cloud based on the OpenStack middleware
 
 It allows the
 instantiation of Virtual Machines (VMs) of the desired environments (in
@@ -21,7 +21,7 @@ in two different data centers: Padova (INFN Padova - University of Padova's
 "Dipartimento di Fisica e Astronomia"), and INFN
 Laboratori Nazionali di Legnaro (LNL).
 
-The CloudVeneto is currently based on the *Yoga* version of the OpenStack
+The CloudVeneto is currently based on the *Caracal* version of the OpenStack
 middleware.
 
 
@@ -33,22 +33,23 @@ The CloudVeneto infrastructure is available to the users and collaborators of th
 * Laboratori Nazionali di Legnaro (LNL)
 
 
-Resource users and administrators
----------------------------------
-Please note that 
-when you create a resource (e.g. a virtual machine) on CloudVeneto, you
-are then responsible to manage it.
-You will be held responsible for all the activities
-performed on the VM created by yourself.
+You can create the  Virtual Machines (and other resources) you need on CloudVeneto or you can use the resources that someone else
+of your group has installed and configured for you.
 
+  
+.. NOTE::
 
-This means that you need to have adequate skills in using the resource
-that you create and at least basic system administration
-skills (some basics on Linux administration are presented in 
-:ref:`Some basics on Linux administration<linuxbasics>`).
-
-If you don't have such system administration skills, you may want to
-ask a colleague to create and manage the needed resources.
+   Please note that 
+   when you create a resource (e.g. a virtual machine) on CloudVeneto, you
+   are then responsible to manage it.
+   You will be held responsible for all the activities
+   performed on the VM created by yourself.
+   This means that you need to have adequate skills in using the resource
+   that you create and at least basic system administration
+   skills (some basics on Linux administration are presented in 
+   :ref:`Some basics on Linux administration<linuxbasics>`).
+   If you don't have such system administration skills, you may want to
+   ask a colleague to create and manage the needed resources.
 
 
 
@@ -64,8 +65,7 @@ Projects are given quotas on resource usage, in terms of virtual
 machines, cores, memory, storage, etc.
 
 A project can have a single user as member (*personal project*) but the
-typical use case are *shared projects*, with multiple users as members,
-which can map to experiments, organizations, research groups, etc. 
+typical use case are *shared projects*, with multiple users as members.
 
 A
 user can be on multiple projects at the same time and switch between
@@ -76,9 +76,6 @@ groups. Among the project's users there is a **project manager** (usually
 the team leader) who is responsible to manage (accepting or refusing)
 membership requests for the project.
 
-.. warning::
-    *Personal private* projects are discouraged and are created only
-    for convincing reasons.
 
 Network access
 --------------
@@ -169,7 +166,7 @@ majordomo@pd.infn.it, writing in the body of the mail:
 
     unsubscribe discuss <your-email-address>
 
-Changes and planned interventions to the service will be posted on the
+Changes and planned interventions to the service are posted on the
 announce@cloudveneto.it. All registered users to the Cloud are member of
 this mailing list.
 
@@ -179,7 +176,8 @@ Getting help for INFN Padova users
 
 `INFN-Padova computing and Network
 service <https://www.pd.infn.it/eng/computing-and-networking/>`__ can provide
-support to INFN-Padova users only for instances created
+support to INFN-Padova users in case of problems with their instances, but only 
+only for the instances created
 using the INFN-Padova "blessed" images, described in :ref:`Public Images for INFN Padova users<publicimagesPd>`.
 
 When contacting the INFN-Padova computing and Network         
