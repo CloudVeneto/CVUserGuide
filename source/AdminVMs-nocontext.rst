@@ -57,7 +57,7 @@ Switch to the **Source** tab:
       :align: center
 
    -  Unless you want to start a VM from a volume (see 
-      :ref:`Improve reliability: creating Virtual Machines from Volumes<BootFromVolume>`), 
+      :ref:`Creating Virtual Machines from Volumes<BootFromVolume>`), 
       as **Select Boot Source** select **Image** or **Instance
       Snapshot** and then select the one to be used.
 
@@ -69,7 +69,7 @@ Switch to the **Flavor** tab:
 
    -  Select the desidered flavor. The flavor is the size of the machine you want to create. This is
       specified using VCPUs (number of virtual CPUs), disk space for the
-      system disk, size for the RAM memory. It is recommended to possibly use 
+      root disk, size for the RAM memory. It is recommended to possibly use 
       small flavors (the flavor of a virtual machine can be changed later if
       required). Flavors are discussed in :ref:`Flavors<Flavors>`.
 
@@ -85,7 +85,7 @@ Switch to the **Networks** tab:
    
        INFN users could see, besides the *<ProjectName>-lan* network, also
        a network called *<ProjectName>-wan*, if the possibility to use
-       public IP numbers was requested. The former one must be selected
+       public IP numbers was requested. The *<ProjectName>-lan*  must be selected
        if the VM doesn't need to be visible on the Internet. The
        *<ProjectName>-wan* network must be selected if instead the VM must
        have a public IP. It will then be necessary to allocate a public
@@ -108,7 +108,7 @@ Switch to the **Key Pair** tab:
 
 
    -  Select the keypair you want to use. This will allow you to
-      log to the VM (usually as root or as an account where you can get
+      log to the VM (usually as an account where you can get
       admin privileges via sudo) using this SSH key.
 
    -  You can also specify the admin (usually root) password of the
@@ -127,10 +127,10 @@ Switch to the **Key Pair** tab:
 Select **Launch Instance** to start the virtual machine being created. You will be
 returned to the Overview screen, where there will be a line with the
 instance name, ip adress and status. The status should be 'Active'
-once the install is complete.
+once the VM is ready.
 
 Once the status of the machine is 'Active', you can watch the console to
-see it installing and booting. You can click on the VM name and go to a
+see it booting. You can click on the VM name and go to a
 dedicated window or from this same table you can access a pull down menu
 on the right hand side under **Actions**. There you will see various options
 and among them **View Log** and **Console**. 
@@ -144,17 +144,17 @@ to access to the console of the VM.
 
 
 
-Improve reliability: creating Virtual Machines from Volumes
+Creating Virtual Machines from Volumes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. _BootFromVolume:
 
 By default Virtual Machines are instantiated using the local disk of the
-Cloud compute node. This means that, in case of failure of the compute
+Cloud compute node for the root disk. This means that, in case of failure of the compute
 node, it may happen that the virtual machine content is lost.
 
 For production servers which are not fully redundant,
 to improve the availability it is advisable to use external storage
-(i.e. a volume) for the system disk of the virtual machine. The advantage is also
+(i.e. a volume) for the root disk of the virtual machine. The advantage is also
 that, if the compute node hosting the virtual machine has to be switched
 off e.g. for maintenance, the Cloud administrator before doing this
 operation can live-migrate the instance to another Cloud compute node
@@ -178,23 +178,20 @@ To create a VM from volume, proceed as explained in
 
 
 
-Accessing Virtual Machines: the big picture
--------------------------------------------
 
 
-Once your VM is in the "running" state you access it through ssh with a default
-username (more on that later) and your private key. 
 
-There are three possible scenarios:
+Logging to a VM
+---------------
+.. _LoggingToAVM:
 
--  You are a INFN user, so you might have access to the internal INFN network:
-   from there you can contact directly your VM on a network like 10.64.x.y;
 
--  You don't have such access or you are connecting from outside such network: you 
-   must access a "gate" machine first and then access the VM;
 
--  You need to perform that "one shot operation" or you want to check the state
-   of your VM: you can use the "Console" tab of your VM via web.
+Virtual machines created on the cloud have their IP assigned on a
+**private** network associated with the project they belong to. Therefore
+they cannot be accessed directly from the internet (unless they are given a
+public floating IP, as discussed later). 
+
 
 .. NOTE ::
 
@@ -204,20 +201,12 @@ There are three possible scenarios:
 
 
 
-Logging to a VM
----------------
-.. _LoggingToAVM:
-
-Virtual machines created on the cloud have their IP assigned on a
-**private** network associated with the project they belong to. Therefore
-they cannot be accessed directly from the internet. 
-
-If you need to log on your VMs from the Internet you must go through a
+If you need to log on your VMs from the Internet you must therefore go through a
 gate machine: **gate.cloudveneto.it**.
 
 When your account on the cloud is created, credentials for accessing such
 gate are sent to you. Contact support@cloudveneto.it in case of problems 
-with this credentials.
+with these credentials.
 
 .. NOTE ::
 
@@ -247,7 +236,7 @@ you can access your VM from the gate machine issuing
            ssh -i ~/private/my_key ubuntu@10.67.15.3
 
 
-Conversely, there is
+There is
 no limitation on the 'outer' services you can reach from your VM (modulo
 the services hosted in the INFN Padova/Legnaro LANs, as described in 
 :ref:`Accessing other hosts/services from Virtual Machines<AccessingFromVMs>`).
@@ -529,7 +518,7 @@ as explained above.
 Access a service running on the VM
 ----------------------------------
 
-Your VM might be running some service (e.g. an http server) you want
+Your VM might be running some services (e.g. an http server) you want
 to access from the net. Since VMs are on a private network this might be tricky.
 A clever approach is to use an **SSH tunnel** (port forwarding mechanism). 
 This technique allows you to *transport* a TCP port opened on your VM
@@ -641,17 +630,18 @@ to transport **multiple ports** at once.
 Copying files to a VM
 ---------------------
 
-Copying files to your VM might be a little more complex since VMs don't
+Copying files to your VM might be a little complex since VMs don't
 have an access facing the internet. Your options are:
 
 
--  Access the VM directly if you are using the INFN network;
+-  Copy the files from the VM directly, if you are connected from the INFN
+   Padova/LNL network and your VM is using a INFN network;
 
--  Use one of the gate machines and make it in a two step fashion:
+-  Use the gate machine and make it in a two step fashion:
 
    -  Copy your file from your machine to the gate;
 
-   -  Copy file from the gate machine to your VM;
+   -  Copy the file from the gate machine to your VM;
 
 -  Exploit the port forwarding mechanism explained in the previous section to access port 22
    of your VM from your PC, so, e.g.:
