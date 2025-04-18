@@ -6,7 +6,7 @@ Managing Storage
 There are several ways of handling disk storage in the CloudVeneto:
 
 -  **Ephemeral storage** exists only for the life of a virtual machine
-   instance. It will persist across reboots of the guest operating
+   instance. It persists across reboots of the guest operating
    system but when the instance is deleted so is the associated storage.
    The size of the ephemeral storage is defined in the virtual machine
    flavor.
@@ -32,7 +32,7 @@ Ephemeral storage
 
 
 Ephemeral storage exists only for the life of a virtual machine
-instance. It will persist across reboots of the guest operating system
+instance. It persists across reboots of the guest operating system
 but when the instance is deleted so is the associated storage. The size
 of the ephemeral storage is defined in the virtual machine flavor.
 
@@ -40,12 +40,12 @@ Among the flavor details (that are listed in the Dashboard when a VM has
 to be launched or can be seen using the *openstack flavor list*
 command), there is an attribute called 'Ephemeral'. When you use a
 flavor with an ephemeral disk size different from zero, the instance is
-booted with an extra virtual disk (besides the root disk) whose size is 
+booted with an supplementary virtual ephemerak disk (besides the root disk) whose size is 
 indicated by the
-ephemeral value. 
+'ephemeral' value. 
 
 .. WARNING ::
-    Please note that, when snapshotting a virtual machine instantiated using
+    Please note that, when snapshotting or shelving a virtual machine instantiated using
     a flavor with the supplementary ephemeral disk, the content of such
     extra disk won't be saved: only the content of the
     root disk will be snapshotted.
@@ -203,9 +203,9 @@ otherwise use the device name:
 .. NOTE ::
     You can attach only your volumes
     Please note that you can attach a volume of yours to an instance
-    created by another user of the same project, but the opposite is not
-    possible: you can't attach a volume created by another user to an
-    instance of yours.
+    created by another user of the same project, while
+    you can't attach a volume created by another user to an
+    instance.
 
 Detaching a Volume
 ^^^^^^^^^^^^^^^^^^
@@ -227,18 +227,21 @@ the content of the volume!)
 .. NOTE ::
     You can detach only your volumes.
     Please note that you can detach a volume of yours from an instance
-    created by another user of the same project, but the opposite is not
-    possible: you can't detach a volume created by another user from an
-    instance of yours.
+    created by another user of the same project, while
+    you can't detach a volume created by another user.
 
+
+.. IMPORTANT ::
+     Please remember to also disable the automatic mounting of that volume, but deleting the
+     relevant line from the /etc/fstab file.
 
 Deleting a Volume
 ^^^^^^^^^^^^^^^^^
 
 If a volume is not needed any longer, to completely remove it (note that
-this step cannot be reverted!):
+**this step cannot be reverted!**):
 
--  if needed, detach the volume from the associated instance
+-  if needed, detach the volume from the associated instance, as explained in the previous section
 
 -  using the Dashboard, click on **Volumes** |rarr| **Volumes**, select the relevant
    volume and then select **Delete Volumes**.

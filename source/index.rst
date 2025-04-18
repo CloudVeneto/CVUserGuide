@@ -32,7 +32,7 @@ Contents:
    ManagingStorage
    Orchestration
    ManagingImages
-   ElasticCluster
+   BatchClusters
    MicroPrimers
    Privacy
    FAQ
