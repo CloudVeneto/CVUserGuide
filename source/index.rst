@@ -27,11 +27,11 @@ Contents:
    GettingStarted
    AdminVMs-nocontext
    ManagingContainers
+   CaaS
    ManagingGPUs
    ManagingStorage
    Orchestration
    ManagingImages
-   CaaS
    ElasticCluster
    MicroPrimers
    Privacy

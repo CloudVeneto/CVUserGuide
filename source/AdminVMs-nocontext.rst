@@ -675,6 +675,17 @@ purpose you will need:
 
 -  to associate the allocated floating IP to the relevant VM.
 
+
+.. NOTE ::
+
+    By default the possibility to use public IP numbers is disabled and
+    therefore by default it is not possible to allocate a floating IP to
+    an instance. If public IPs are needed for your project, please
+    contact support@cloudveneto.it specifying what is/are the relevant
+    service(s) and the port(s) that need to be open.
+   
+
+   
 Floating IP addresses can have their associations modified at any time,
 regardless of the state of the instances involved.
 
@@ -742,15 +753,8 @@ click the **Actions** button and select the **Release Floating IP** option.
    :align: center
 
 
-.. NOTE ::
 
-    By default the possibility to use public IP numbers is disabled and
-    therefore by default it is not possible to allocate a floating IP to
-    an instance. If public IPs are needed for your project, please
-    contact support@cloudveneto.it specifying what is/are the relevant
-    service(s) and the port(s) that need to be open.
-
-.. WARNING ::
+.. IMPORTANT ::
 
    Instances with public floating IPs are regularly scanned to be sure
    they don't expose vulnerable services.
@@ -763,6 +767,17 @@ To control which services/ports of your virtual machine can be accessed,
 be sure you are using the right security group (as discussed in :ref:`Setting security group(s)<SecurityGroups>`) and
 you have correctly configured firewall (iptables, firewalld etc.) on the
 relevant VM.
+
+Accessing other hosts/services from Virtual Machines
+----------------------------------------------------
+.. _AccessingFromVMs:
+
+There is no limitation on the 'outer' services you can reach from your
+VM. However by default it is not possible to access a host/service
+hosted in Padova or Legnaro.
+
+If, for some reasons, you need to access some services hosted in Padova
+or Legnaro from the Cloud, please contact support@cloudveneto.it.
 
 
 Creating accounts on your Virtual Machine
@@ -797,16 +812,6 @@ If you are an INFN user, and you are using a **<operating-system>-INFNPadova-x86
    performed on the VMs created by yourself.
 
 
-Accessing other hosts/services from Virtual Machines
-----------------------------------------------------
-.. _AccessingFromVMs:
-
-There is no limitation on the 'outer' services you can reach from your
-VM. However by default it is not possible to access a host/service
-hosted in Padova or Legnaro.
-
-If, for some reasons, you need to access some services hosted in Padova
-or Legnaro from the Cloud, please contact support@cloudveneto.it.
 
 Flavors
 -------
@@ -834,7 +839,8 @@ appears in the Dashboard when you launch a new instance.
 such storage is deleted when the relevant instance is deleted (see
 :ref:`Ephemeral Storage<EphemeralStorage>`).
 
-'Ephemeral Disk' is the size of the supplementary ephemeral disk.
+'Ephemeral Disk' is the size of the supplementary ephemeral disk. **Please note that the content of the supplementary ephemeral disk
+is not preserved when snapshotting of shelving an instance**.
 
 .. WARNING ::
 
@@ -880,6 +886,12 @@ You can then remount the /mnt filesystem:
    sudo mount /mnt
 
 
+.. WARNING ::
+
+    Please note that the content of the supplementary ephemeral disk
+    is not preserved when snapshotting of shelving an instance.
+
+   
 Stopping and Starting VMs
 -------------------------
 VMs can be stopped and started in different ways available from the
@@ -892,8 +904,8 @@ VMs can be stopped and started in different ways available from the
 .. WARNING ::
 
     The cleanest way to shutdown (or reboot) an instance is however to
-    log on the VM and issue from the shell the *shutdown* or
-    *reboot* command. 
+    log on the VM and issue from the shell the *shutdown* (or
+    *reboot*) command. 
 
 
 Contextualisation
@@ -1158,7 +1170,7 @@ From the **Compute** |rarr| **Instances** table select the desired VM and click
     .. NOTE ::
    
        Please note that when you shelve an instance, the resources used by that VM are released and are available to host other 
-       instances, but the shelved instance is still accounted in the used quota.
+       instances, but the shelved instance is still accounted in the used quota of the project.
 
 
 
