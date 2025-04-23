@@ -251,7 +251,7 @@ Sharing a volume between multiple (virtual) machines
 As discussed in :ref:`Volumes<volumes>`, a volume may be attached to a single instance.
 However it can be shared with other virtual machines of the Cloud
 (and/or with other hosts) using NFS.
-The following explains how this can be done, on a CentOS7 server:
+The following explains how this can be done, on a AlmaLinux9 server:
 
 1. **Configure NFS server**
 
@@ -271,21 +271,14 @@ The following explains how this can be done, on a CentOS7 server:
 
           # yum whatprovides "*/rpc.nfsd"
 
-          Loaded plugins: dellsysid, fastestmirror
-          Loading mirror speeds from cached hostfile
-           * base: centos.fastbull.org
-           * epel: mirror.23media.de
-           * extras: centos.fastbull.org
-           * updates: fr2.rpmfind.net
-          1:nfs-utils-1.3.0-0.8.el7.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
-          Repo        : base
+          Last metadata expiration check: 286 days, 2:02:18 ago on Thu Jul 11 07:31:17 2024.
+          nfs-utils-1:2.5.4-25.el9.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
+          Repo        : @System
           Matched from:
           Filename    : /usr/sbin/rpc.nfsd
 
-
-
-          1:nfs-utils-1.3.0-0.8.el7.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
-          Repo        : @base
+          nfs-utils-1:2.5.4-25.el9.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
+          Repo        : baseos
           Matched from:
           Filename    : /usr/sbin/rpc.nfsd
 
@@ -299,7 +292,7 @@ The following explains how this can be done, on a CentOS7 server:
 
       ::
 
-          /dataNfs 10.67.1.*(ro,no_root_squash)
+          /dataNfs 10.67.1.0/24(ro,no_root_squash)
 
       Note that there are no spaces between the '\*' and the '('.
 
@@ -320,7 +313,7 @@ The following explains how this can be done, on a CentOS7 server:
       ::
 
                                                                                                
-          /dataNfs 10.67.1.*(async,rw,no_root_squash)                                                 
+          /dataNfs 10.67.1.0/24(async,rw,no_root_squash)                                                 
 
       To export a volume using the sync option the */etc/exports* will be
       something like:
@@ -328,12 +321,12 @@ The following explains how this can be done, on a CentOS7 server:
       ::
 
                                                                                                
-          /dataNfs 10.67.1.*(sync,rw,no_root_squash)                                                  
+          /dataNfs 10.67.1.0/24(sync,rw,no_root_squash)                                                  
 
    d. Check the firewall on the virtual machine. Ensure that the other
       instances have both UDP and TCP access to ports 111, 2049 and 875:
 
-      -  For newer distributions using *firewalld* issue the following
+      -  If firewalld is installed and running, issue the following
          commands:
 
          ::
@@ -341,35 +334,6 @@ The following explains how this can be done, on a CentOS7 server:
              firewall-cmd --add-service=nfs
              firewall-cmd --permanent --add-service=nfs
 
-      -  For older distributions using iptables, the
-         */etc/sysconfig/iptables* file should be something like this:
-
-         ::
-
-             *filter
-             :INPUT ACCEPT [0:0]
-             :FORWARD ACCEPT [0:0]
-             :OUTPUT ACCEPT [0:0]
-             -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-             -A INPUT -p icmp -j ACCEPT
-             -A INPUT -i lo -j ACCEPT
-             -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
-             -A INPUT -m state --state NEW -m tcp -p tcp --dport 111 -j ACCEPT
-             -A INPUT -m state --state NEW -m udp -p udp --dport 111 -j ACCEPT
-             -A INPUT -m state --state NEW -m tcp -p tcp --dport 875 -j ACCEPT
-             -A INPUT -m state --state NEW -m udp -p udp --dport 875 -j ACCEPT
-             -A INPUT -m state --state NEW -m tcp -p tcp --dport 2049 -j ACCEPT
-             -A INPUT -m state --state NEW -m udp -p udp --dport 2049 -j ACCEPT
-             -A INPUT -j REJECT --reject-with icmp-host-prohibited
-             -A FORWARD -j REJECT --reject-with icmp-host-prohibited
-             COMMIT
-
-         Please remember to restart iptables after any change on that
-         file:
-
-         ::
-
-             service iptables restart
 
    e. Check the security group (see :ref:`Setting security group(s)<SecurityGroups>`): access to ports 111, 875 and
       2049 (IPv4 Ingress both TCP and UDP) should be guaranteed:
@@ -383,13 +347,9 @@ The following explains how this can be done, on a CentOS7 server:
 
       ::
 
-          systemctl restart nfs
+          systemctl restart nfs-server
+	  systemctl enable nfs-server
 
-      or
-
-      ::
-
-          service nfs restart
 
 2. **Configure client machine(s)**
 
@@ -398,26 +358,21 @@ The following explains how this can be done, on a CentOS7 server:
 
       ::
 
-          # yum whatprovides "*/mount.nfs"
-          Loaded plugins: dellsysid, fastestmirror
-          Loading mirror speeds from cached hostfile
-           * base: centos.fastbull.org
-           * epel: mirror.23media.de
-           * extras: centos.fastbull.org
-           * updates: fr2.rpmfind.net
-          1:nfs-utils-1.3.0-0.8.el7.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
-          Repo        : base
+          # yum whatprovides "*/rpc.nfsd"
+
+          Last metadata expiration check: 286 days, 2:02:18 ago on Thu Jul 11 07:31:17 2024.
+          nfs-utils-1:2.5.4-25.el9.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
+          Repo        : @System
           Matched from:
-          Filename    : /sbin/mount.nfs
+          Filename    : /usr/sbin/rpc.nfsd
 
-
-
-          1:nfs-utils-1.3.0-0.8.el7.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
-          Repo        : @base
+          nfs-utils-1:2.5.4-25.el9.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
+          Repo        : baseos
           Matched from:
-          Filename    : /sbin/mount.nfs
+          Filename    : /usr/sbin/rpc.nfsd
 
           # yum install nfs-utils
+
 
    b. issue a mount command such as this one (assuming 10.67.1.4 is the
       NFS server):
