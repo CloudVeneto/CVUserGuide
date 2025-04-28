@@ -116,7 +116,7 @@ redirected to a form like this:
 
 
 Most of the fields are automatically filled in by the Identity Provider system.
-Fill the form with the required information left.
+Fill in the form with the required information left.
 
 For what concerns the **Project Action** (projects have been discussed in 
 :ref:`Projects<projects>`)
@@ -207,12 +207,11 @@ following image will appear.
 
 
 
-Please fill the form with your personal data (First Name, Last Name, Email
-Address. 
+Please fill in the form with your personal data (First Name, Last Name, Email
+Address). 
 Choose a User
 name (please note that it could be changed by the Cloud admins during
 the registration process) and a Password. 
-Specify your home institution and the relevant unit/department.
 
 For what concerns the **Project Action** (projects have been discussed in 
 :ref:`Projects<projects>`)
