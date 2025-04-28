@@ -115,8 +115,8 @@ redirected to a form like this:
 
 
 
-Fill the form with the required information. In particular please specify 
-the relevant unit/department of your home institution.
+Most of the fields are automatically filled in by the Identity Provider system.
+Fill the form with the required information left.
 
 For what concerns the **Project Action** (projects have been discussed in 
 :ref:`Projects<projects>`)
@@ -131,8 +131,17 @@ one or more existing projects (choose them in the relevant box).
 
 Select **Create new project** if instead you want to ask the creation of
 a new project (and you are the leader of the experiment/research group
-associated to this project). In this case you will have to specify also
-a Project name and a Project Description. 
+associated to this project).  In this case you will have to specify also:
+
+- the Project name
+
+- a short Project Description, up to 500 characters
+
+- the Project expiration date
+
+- the name of a contact person, responsible for the project, or a supervisor
+
+- the home institution and the department that the project must belong to 
 
 
 
@@ -218,10 +227,17 @@ one or more existing projects (choose them in the relevant box).
 
 Select **Create new project** if instead you want to ask the creation of
 a new project (and you are the leader of the experiment/research group
-associated to this project). In this case you will have to specify also
-a Project name and a Project Description. 
+associated to this project). In this case you will have to specify also:
 
+- the Project name
 
+- a short Project Description, up to 500 characters
+
+- the Project expiration date
+
+- the name of a contact person, responsible for the project, or a supervisor
+
+- the home institution and the department that the project must belong to
 
 Newly created projects will get a default quota of:
 
