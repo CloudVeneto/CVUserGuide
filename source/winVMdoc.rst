@@ -87,21 +87,26 @@ Navigate to the Console tab (alongside Overview, Interfaces, Log, Console, Actio
 
 Install and Configure Windows 10
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-From the console, you can begin the initial Windows 10 setup process. Follow the on-screen instructions:
+
+From the console, you can begin the initial Windows 10 setup process. 
+
+**Please wait approximately 15 minutes before starting the Windows configuration process after the VM has been created.**
+
+Follow the on-screen instructions:
 
 * Select the appropriate region
 
-  .. image:: ./images/Win10-StartInstallation.png
+  .. image:: ./images/Win10-StartInstallationENG.png
      :align: center
 
 * Choose your keyboard layout
 
-  .. image:: ./images/Win10-Keyboard.png
+  .. image:: ./images/Win10-KeyboardENG.png
      :align: center
 
 * Wait for any necessary operations to complete (this might take a few minutes)
 
-  .. image:: ./images/Win10-Wait.png
+  .. image:: ./images/Win10-WaitENG.png
      :align: center
 
 
@@ -110,14 +115,14 @@ License Agreement
 
 Accept the Windows License Agreement when prompted.
 
-.. image:: ./images/Win10-License.png
+.. image:: ./images/Win10-LicenseENG.png
    :align: center
 
 Installation Mode
 ^^^^^^^^^^^^^^^^^
 Choose the installation type that suits your needs. A standard installation should be ok for most cases.
 
-.. image:: ./images/Win10-PersonalOrganization.png
+.. image:: ./images/Win10-PersonalOrganizationENG.png
    :align: center
 
 Set Up a User Account
@@ -127,12 +132,12 @@ When prompted add your account:
 
 * Select “Offline account” (unless you have a Microsoft account and you prefer to use that)
 
-  .. image:: ./images/Win10-AccountOffline.png
+  .. image:: ./images/Win10-AccountOfflineENG.png
      :align: center
 
 * If you select offline mode, continue by clicking “Limited experience” when asked
 
-   .. image:: ./images/Win10-Go.png
+   .. image:: ./images/Win10-GoENG.png
       :align: center
 
 Create a Local User Account
@@ -140,12 +145,12 @@ Create a Local User Account
 Set a username and password for the local user account. 
 This will be the main credential used to log in to the VM.
 
-.. image:: ./images/Win10-Account.png
+.. image:: ./images/Win10-AccountENG.png
    :align: center
 
-.. image:: ./images/Win10-Password.png
+.. image:: ./images/Win10-PasswordENG.png
    :align: center
-
+ 
 
 Set Security Questions
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -153,7 +158,7 @@ Set Security Questions
 During the setup process, you’ll be asked to define three security questions. These are required for account recovery in case you forget your password.
 Choose the questions and answers that are easy for you to remember but hard for others to guess.
 
-.. image:: ./images/Win10-Questions.png
+.. image:: ./images/Win10-QuestionsENG.png
    :align: center
 
 Privacy and Permissions Settings
@@ -188,15 +193,18 @@ You will be prompted to configure various Windows permissions and privacy settin
      :align: center
 * Customize your experience (optional settings based on usage)
 
-  .. image:: ./images/Win10-Personal.png
+  .. image:: ./images/Win10-PersonalENG.png
      :align: center
 * Enable or disable Cortana (Microsoft's virtual assistant)
 
-  .. image:: ./images/Win10-Cortana.png
+  .. image:: ./images/Win10-CortanaENG.png
      :align: center
 * Allow automatic setup and updates (do not turn off the computer during this process)
 
-  .. image:: ./images/Win10-execution.png
+  .. image:: ./images/Win10-executionENG.png
+     :align: center
+  
+  .. image:: ./images/Win10-execution2ENG.png
      :align: center
 
 Finalizing the Setup
@@ -205,12 +213,12 @@ Finalizing the Setup
 After completing these steps, Windows will finalize the setup.
 You’ll see a message like “Almost there…”.
 
-.. image:: ./images/Win10-Ready.png
+.. image:: ./images/Win10-ReadyENG.png
    :align: center
 
 Once finished, the system will boot into a fully operational Windows 10 environment, based on the original "Win10_22HXXXX" image.
 
-.. image:: ./images/Win10-ReadyStart.png
+.. image:: ./images/Win10-ReadyStartENG.png
    :align: center
 
 
@@ -220,20 +228,21 @@ Windows Activation
 You may notice a watermark in the lower-right corner of the desktop saying:
 "Activate Windows. Go to Settings to activate Windows."
 
-.. image:: ./images/Win10-WindowsKey.png
+.. image:: ./images/Win10-WindowsKeyENG.png
    :align: center
 
 Open Settings > Update & Security > Activation.
 
 A message will appear: "Windows is not activated. Activate now."
 
-.. image:: ./images/Win10-AccountWin.png
+.. image:: ./images/Win10-AccountWinENG.png
    :align: center
 
 Proceed to enter a valid product key when prompted.
 
-.. image:: ./images/Win10-Key.png
+.. image:: ./images/Win10-KeyENG.png
    :align: center
+
 
 
 .. NOTE ::
@@ -282,8 +291,8 @@ These commands will:
 * Attempt to activate Windows via the INFN KMS infrastructure
 
 
-Connecting to the Windows VM via Remote Desktop
------------------------------------------------
+Connecting to the Windows VM via Remote Desktop from Windows
+------------------------------------------------------------
 
 Once the setup is complete and the instance is running, you can connect to the virtual machine using Remote Desktop (RDP).
 
@@ -307,12 +316,34 @@ Once the setup is complete and the instance is running, you can connect to the v
 
 
 
+Connecting to the Windows VM via Remote Desktop from Linux
+----------------------------------------------------------
+
+Once the setup is complete and the instance is running, you can connect to the virtual machine using rdesktop (lightweight, terminal-based).
+
+* Installation
+  
+    Open a terminal and run
+
+    ::
+
+       dnf install rdesktop 
+
+    This command installs rdesktop on Almalinux systems.
 
 
+* Usage
 
+    To connect to a remote Windows machine, use:
 
+    ::
 
+      rdesktop XXX.XXX.X.XXX
 
+    Replace XXX.XXX.X.XXX with the IP address or hostname of the Windows computer you want to access.
+
+   .. image:: ./images/Win10-RemoteDesktopLinux.png
+    :align: center
 
 
 
