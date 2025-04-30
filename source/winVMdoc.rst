@@ -167,30 +167,6 @@ Privacy and Permissions Settings
 You will be prompted to configure various Windows permissions and privacy settings. Review and choose according to your preferences:
 
 
-* Allow Microsoft to use your location
-
-  .. image:: ./images/Win10-Position.png
-     :align: center
-* Enable Find My Device
-
-  .. image:: ./images/Win10-Dispositivo.png
-     :align: center
-* Choose to send diagnostic data to Microsoft (basic or full)
-
-  .. image:: ./images/Win10-Diagnostic.png
-     :align: center
-* Enable pen input improvement
-
-  .. image:: ./images/Win10-Pen.png
-     :align: center
-* Allow personalized experiences using diagnostic data
-
-  .. image:: ./images/Win10-Expertice.png
-     :align: center
-* Permit apps to use your advertising ID
-
-  .. image:: ./images/Win10-ID.png
-     :align: center
 * Customize your experience (optional settings based on usage)
 
   .. image:: ./images/Win10-PersonalENG.png
