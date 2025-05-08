@@ -37,8 +37,11 @@ Create the bootable volume
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 While creating the volume, fill in all the required parameters.
-Important: make sure to set the volume size to at least 35GB.
+Important: make sure to set the volume size to **at least 35GB**.
 (The system might allow smaller sizes, but Windows installation or updates may fail without enough space.)
+
+You should also assign **a clear and meaningful name** to the volume (e.g., including your username or project name), so it can be easily identified later.
+
 
 .. image:: ./images/Win10-CreateVolume.png
    :align: center
@@ -48,7 +51,7 @@ Launch an instance from the bootable volume
 
 Once the volume has been created, it will appear under the Volumes section.
 Open the Actions dropdown next to the new volume and select "Launch as Instance".
-Configure the instance as needed (specifying the flavor, network, key pair, etc.).
+Configure the instance as needed (specifying the flavor, network,  etc.).
 
 
 .. image:: ./images/Win10-LaunchInstance.png
@@ -85,6 +88,16 @@ Navigate to the Console tab (alongside Overview, Interfaces, Log, Console, Actio
 .. image:: ./images/Win10-Console.png
    :align: center
 
+
+
+.. WARNING::
+   When a VM is deleted, the associated volume cannot be reused to launch a new instance.
+   This is because the volume becomes tightly bound to the deleted VM’s configuration and is no longer bootable or attachable to a new VM.
+   Therefore, it is strongly recommended to delete the volume manually after deleting the VM, to free up resources and avoid unnecessary storage consumption.
+
+
+
+
 Install and Configure Windows 10
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -120,7 +133,8 @@ Accept the Windows License Agreement when prompted.
 
 Installation Mode
 ^^^^^^^^^^^^^^^^^
-Choose the installation type that suits your needs. A standard installation should be ok for most cases.
+Choose the installation type that suits your needs. 
+An installation for personal use should be suitable for most cases.
 
 .. image:: ./images/Win10-PersonalOrganizationENG.png
    :align: center
@@ -227,6 +241,29 @@ Proceed to enter a valid product key when prompted.
   https://support.microsoft.com/en-us/windows/activate-windows-10-92c27cff-d2c2-6d78-4136-6b40baecc8c3
   If you don’t have a valid product key, you will need to acquire one through Microsoft or a licensed distributor.
 
+Using an Existing Windows License from a Physical Machine
+---------------------------------------------------------
+
+If you have a physical PC with a Windows license sticker (typically found on the case or under the battery for laptops), 
+you can use the **product key printed on the label** to activate your virtual machine.
+Enter the key during the Windows activation process.
+
+In some cases, the product key may be embedded in the BIOS/UEFI firmware instead of printed on a label. To retrieve it, follow these steps:
+
+
+* Open Command Prompt as Administrator inside the physical PC with a Windows license
+
+
+* Run the following command:
+
+  ::
+
+     wmic path softwarelicensingservice get OA3xOriginalProductKey
+
+If the key is detected, it will be displayed and can be used for activation.
+
+
+
 
 KMS License Activation (**INFN Staff Only**)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -246,15 +283,30 @@ KMS License Activation (**INFN Staff Only**)
       
    https://web.infn.it/windows/index.php/istruzioni/17-kms-categoria
 
-   To activate Windows using the KMS server, follow these steps only if you are authorized and have a valid product key.
+* KMS client setup keys for Windows operating systems at the following official Microsoft link:
 
-   * Open Command Prompt as Administrator (Right-click on Command Prompt and select “Run as Administrator”)
+  https://learn.microsoft.com/it-it/windows-server/get-started/kms-client-activation-keys?tabs=server2025%2Cwindows1110ltsc%2Cversion1803%2Cwindows81#windows-11-and-windows-10-semi-annual-channel
 
-   * Run the following commands one by one:
+  These keys are used for KMS-based activation and should be entered using the slmgr.vbs /ipk command as described in the activation section.
+
+  .. NOTE ::
+
+
+   These keys do not activate Windows by themselves — they require access to a valid KMS server (e.g., kms.infn.it).
+
+.. WARNING::
+
+      To activate Windows using the KMS server, follow these steps only if you are authorized and have a valid product key.
+      If you need support or to request a key, please contact: support@cloudveneto.it
+
+
+* Open Command Prompt as Administrator (Right-click on Command Prompt and select “Run as Administrator”)
+
+* Run the following commands one by one:
 
    ::
 
-      cscript \windows\system32\slmgr.vbs /ipk "ENTER-YOUR-PRODUCT-KEY-HERE"   #Replace "ENTER-YOUR-PRODUCT-KEY-HERE" with the specific product key for your Windows version.
+      cscript \windows\system32\slmgr.vbs /ipk "ENTER-OS-PRODUCT-KEY-HERE"   #Replace "ENTER-OS-PRODUCT-KEY-HERE" with the specific product key for your Windows version.
       cscript \windows\system32\slmgr.vbs /skms kms.infn.it
       cscript \windows\system32\slmgr.vbs /ato
 
@@ -265,6 +317,9 @@ These commands will:
 * Configure the KMS server to kms.infn.it
 
 * Attempt to activate Windows via the INFN KMS infrastructure
+
+
+
 
 
 Connecting to the Windows VM via Remote Desktop from Windows
@@ -295,36 +350,28 @@ Once the setup is complete and the instance is running, you can connect to the v
 Connecting to the Windows VM via Remote Desktop from Linux
 ----------------------------------------------------------
 
-Once the setup is complete and the instance is running, you can connect to the virtual machine using rdesktop (lightweight, terminal-based).
+Once the setup is complete and the instance is running, you can connect to the virtual machine using e.g. rdesktop (lightweight, terminal-based).
 
 * Installation
   
-    Open a terminal and run
+    On RHEL9 compatible systems (e.g. AlmaLinux9) open a terminal and, as root, run
 
     ::
 
        dnf install rdesktop 
 
-    This command installs rdesktop on Almalinux systems.
 
 
 * Usage
 
-    To connect to a remote Windows machine, use:
+    To connect to the Windows VM, use:
 
     ::
 
-      rdesktop XXX.XXX.X.XXX
+      rdesktop X.X.X.X
 
-    Replace XXX.XXX.X.XXX with the IP address or hostname of the Windows computer you want to access.
+    Replace X.X.X.X with the IP address of the Windows VM you want to access.
 
    .. image:: ./images/Win10-RemoteDesktopLinux.png
     :align: center
-
-
-
-
-
-
-
 
