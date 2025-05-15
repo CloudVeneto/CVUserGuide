@@ -238,7 +238,8 @@ Proceed to enter a valid product key when prompted.
 .. NOTE ::
 
   For official instructions on how to activate Windows, refer to the Microsoft support page:
-  https://support.microsoft.com/en-us/windows/activate-windows-10-92c27cff-d2c2-6d78-4136-6b40baecc8c3
+  https://support.microsoft.com/en-us/windows/activate-windows-c39005d4-95ee-b91e-b399-2820fda32227#windowsversion=windows_10
+
   If you don’t have a valid product key, you will need to acquire one through Microsoft or a licensed distributor.
 
 Using an Existing Windows License from a Physical Machine
@@ -374,4 +375,49 @@ Once the setup is complete and the instance is running, you can connect to the v
 
    .. image:: ./images/Win10-RemoteDesktopLinux.png
     :align: center
+
+
+Accessing a Windows VM from a network without direct access (SSH tunnel for RDP)
+--------------------------------------------------------------------------------
+
+If your machine is on a network that cannot directly access the Windows VM, you need to create an SSH tunnel for port 3389 (used by Remote Desktop Protocol - RDP).
+
+You will connect through a jump host (a machine that can access the VM is gate.cloudveneto.it ).
+
+* From Linux
+
+  * Create the SSH tunnel:
+
+    :: 
+
+       ssh -L20389:10.X.Y.Z:3389 <user>@gate.cloudveneto.it
+
+  
+    10.X.Y.Z is VM IP and  20389 can be replaced with number in the range 1025-65535  
+    Leave this terminal open and the tunnel will be active as long as the SSH session is alive.
+
+
+  *  Start RDP client (using rdesktop):
+
+    :: 
+
+      rdesktop localhost:3389
+
+* From Windows (using PowerShell or Command Prompt)
+
+  * Open PowerShell or Command Prompt as Administrator
+
+    Right-click → "Run as administrator")
+
+  * Create the SSH tunnel
+
+    Run the following command (replace the placeholders with your information):
+
+    ::
+       ssh -L 13389:<VM-PRIVATE-IP>:3389 <your_username>@gate.cloudveneto.it
+
+    Leave the terminal window open and the tunnel will be active as long as the SSH session is alive.
+
+
+  * Start RDP connection via Remote Desktop 
 
