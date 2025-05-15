@@ -53,6 +53,12 @@ Once the volume has been created, it will appear under the Volumes section.
 Open the Actions dropdown next to the new volume and select "Launch as Instance".
 Configure the instance as needed (specifying the flavor, network,  etc.).
 
+.. NOTE ::
+
+   To ensure acceptable performance, it is recommended to create the VM with a flavor medium or higher.
+
+
+
 
 .. image:: ./images/Win10-LaunchInstance.png
    :align: center
