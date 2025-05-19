@@ -26,6 +26,7 @@ Contents:
    Registration
    GettingStarted
    AdminVMs-nocontext
+   winVMdoc
    ManagingContainers
    CaaS
    ManagingGPUs
