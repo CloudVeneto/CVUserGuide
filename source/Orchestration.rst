@@ -1,7 +1,7 @@
 ..    include:: <isonum.txt>
 
-Orchestration
-=============
+Resource Orchestration
+======================
 
 CloudVeneto provides an orchestration service, implemented
 through the OpenStack **Heat** component, that allows you to spin up

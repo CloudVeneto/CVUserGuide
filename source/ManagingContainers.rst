@@ -34,3 +34,6 @@ Orchestrating containers
 ------------------------
 If you need to orchestrate multiple containers, we suggest to use Kubernetes (K8S), which is the most popular container orchestrator.
 
+Please note that CloudVeneto provides a K8s orchestration service, discussed in the :ref:`Container-as-a-Service (CaaS) Platform<CaaS>` section.
+
+

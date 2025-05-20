@@ -20,7 +20,7 @@ your own for the most part of the day to day administration tasks.
 
 .. NOTE ::
     We will only focus on Linux VMs, showing differences between the
-    RedHat (CentOS, Fedora, ... ) and Debian (Ubuntu, Mint, ... )
+    RedHat (AlmaLinux, CentOS, Fedora, ... ) and Debian (Ubuntu, Mint, ... )
     distributions.
 
     Throughout this chapter we will address the former with RH and the
@@ -125,7 +125,7 @@ Managing software on RH distributions
 
 Let's try to install the wget software on CentOS or Fedora linux.
 
-We will use **yum** (**dnf** on Fedora 21) and **rpm** for the task.
+We will use **yum** (**dnf** on newest distributions) and **rpm** for the task.
 
 Since we will be performing operations as the superuser, if you haven't
 already, please :ref:`set up sudo<sudo>` first.

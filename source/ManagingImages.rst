@@ -109,12 +109,16 @@ Many open source projects such as Ubuntu and Fedora produce
 pre-built images which can be used for certain clouds. If these are
 available, it is much easier to use them compared to building your own.
 
--  `Fedora repository <https://getfedora.org/cloud/>`__
 
--  `Ubuntu repository <https://cloud-images.ubuntu.com/>`__
+-  `AlmaLinux images <https://wiki.almalinux.org/cloud/Generic-cloud.html>`__
+
+-  `Fedora images <https://getfedora.org/cloud/>`__
+
+-  `Ubuntu images <https://cloud-images.ubuntu.com/>`__
 
 -  `CentOS images <http://cloud.centos.org/centos/>`__
 
+   
 
 
 Using an Ubuntu image as an example, after you downloaded the image from
@@ -187,7 +191,15 @@ Shared Images
 
 
 As mentioned before, users are not allowed to publish public images.
-However private images can be shared between different projects. This is
+However private images can be shared between different projects. 
+
+
+.. IMPORTANT ::
+    Images can be shared only by the manager of the project.
+
+
+
+The sharing of an image is
 currently only possible via the command line tools.
 
 If an image has been uploaded to your currently active project, using

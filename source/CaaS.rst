@@ -1,5 +1,8 @@
-Container-as-a-Service (CaaS) Platform (**EXPERIMENTAL**)
-=========================================================
+Container-as-a-Service (CaaS) Platform
+=======================================
+.. _CaaS:
+
+
 
 Container-as-a-Service provides an easy way to run containerized software
 packages in the cloud. Unlike the more widely recognized Kubernetes-as-a-Service

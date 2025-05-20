@@ -2,7 +2,7 @@
 
 Managing GPUs
 ================
-CloudVeneto provides Unipd Physics Dept. and INFN Padova users with some
+CloudVeneto provides **Unipd Physics Dept. and INFN Padova users** with some
 GPUs (Graphics Processing Units). These are:
 
    * 4 GPU Nvidia V100
@@ -11,16 +11,19 @@ GPUs (Graphics Processing Units). These are:
    * 2 GPU Nvidia TITAN Xp
    * 1 GPU Nvidia GeForce GTX TITAN
 
-
-There are actually other 5 Nvidia GPUs integrated in CloudVeneto, but these
-are reserved to specific projects (the ones who paid for these resources).
-
-
 The Nvidia T4 GPUs are divided in 2 sets:
    * the first set is composed by 4 Nvidia T4 GPUs, each one coupled with 15 
      CPU cores; 
    * the second set is composed by 8 Nvidia T4 GPUs, each one coupled with 8 
      CPU cores.
+
+     
+.. NOTE::
+  There are actually other Nvidia GPUs integrated in CloudVeneto, but these
+  are reserved to specific projects (the ones who paid for these resources).
+  The instructions in this section are not relevant for these other GPUs.
+
+
 
 
 
@@ -36,6 +39,7 @@ the relevant instructions).
 
 The only exception is  for the 4 T4 GPUs with 15 CPU
 cores, that are usable also from the **PhysicsOfData-students** project.
+
 
 .. WARNING::
   Please note that the members of the **PhysicsOfData-students** project have the priority on the
@@ -296,8 +300,9 @@ Please consider the following policies when using GPU instances:
 
 - Before creating an instance using one or more GPUs, please register such allocation 
   as explained :ref:`here<ReservingGpu>`.
-  Instances for which there isn't a reservation 
-  can be deleted by the Cloud administrators.
+  
+- **Instances for which there isn't a reservation 
+  can be deleted by the Cloud administrators**.
 
 
 - The project HPC-Physics must be used **only** to instantiate virtual
