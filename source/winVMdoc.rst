@@ -394,8 +394,7 @@ You will connect through a jump host (a machine that can access the VM is gate.c
 
   * Create the SSH tunnel:
 
-    :: 
-
+    ::
        ssh -L20389:10.X.Y.Z:3389 <user>@gate.cloudveneto.it
 
   
@@ -419,11 +418,14 @@ You will connect through a jump host (a machine that can access the VM is gate.c
 
     Run the following command (replace the placeholders with your information):
 
-    ::
+    
+     ::
+	
        ssh -L 13389:<VM-PRIVATE-IP>:3389 <your_username>@gate.cloudveneto.it
 
     Leave the terminal window open and the tunnel will be active as long as the SSH session is alive.
 
 
-  * Start RDP connection via Remote Desktop 
+  * Start RDP connection via Remote Desktop specifying the relevant port (13389 in
+    our example)
 
