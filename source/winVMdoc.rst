@@ -395,6 +395,7 @@ You will connect through a jump host (a machine that can access the VM is gate.c
   * Create the SSH tunnel:
 
     ::
+      
        ssh -L20389:10.X.Y.Z:3389 <user>@gate.cloudveneto.it
 
   
