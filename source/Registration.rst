@@ -91,6 +91,7 @@ The following page should appear:
 -  If you have an account on the INFN Authenticaton and
    Authorization Infrastructure (INFN AAI),
    click on the INFN AAI logo and proceed with :ref:`Enrollment procedure through INFN AAI or UniPD SSO<Enrollment>`.
+   You will have also to be compliant with the rules for the use of INFN resources, discussed in :ref:`Prerequisites for using INFN resources<INFNReq>`.
 
 -  If you instead have an account on the UniPD Single Sign-On (SSO)
    Infrastructure (e.g. you have a  @unipd.it or
