@@ -253,20 +253,21 @@ the NVIDIA drivers.
 
 What do do when your reservation expires
 -----------------------------------------
-When your reservation for a GPU expires, you need to release it so that it can be used by other users.
+When your reservation for a GPU expires, you need to delete it so that it can be used by other users.
 
-Possible options are:
-
-  * Deleting the instance  
-  * Shelving the instance (see :ref:`Shelving Virtual Machines<ShelvingVMs>`)
-
-The second option is useful if you need to use that VM again in the near future.
+If you need to use that VM again in the near future, a possibile approach is creating the VM from a volume
+(see :ref:`Creating Virtual Machines from Volumes<BootFromVolume>`). When you need to release the GPU, you can
+delete the VM but the disk will be preserved (assuming that you specified 'No' for **Delete Volume on Instance Delete** at VM creation time).
+When you need again to use a GPU, after having successfully reserved it, you can created another VM using this volume.
 
 
-.. WARNING ::
-   Only the content of the 'root disk' is saved when you do a shelve (or a snapshot) of a VM.
-   So if the instance was created using a flavor that has a supplementary ephemeral disk, the content of such disk
-   is NOT saved and will be lost.
+    .. WARNING ::
+
+       Since there are known issues using shelving with virtual machines with GPUs, we do NOT reccomend to use this functionality
+       for releasing GPUs.
+
+
+
 
 
 

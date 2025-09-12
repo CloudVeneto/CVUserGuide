@@ -1173,6 +1173,12 @@ From the **Compute** |rarr| **Instances** table select the desired VM and click
        instances, but the shelved instance is still accounted in the used quota of the project.
 
 
+    .. IMPORTANT ::
+   
+       There are known issues for this functionality with virtual machines with GPUs: the unshelving could not work for such VMs.
+
+       
+
 
 Deleting Virtual Machines
 -------------------------
