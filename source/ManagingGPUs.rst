@@ -258,12 +258,12 @@ When your reservation for a GPU expires, you need to delete it so that it can be
 If you need to use that VM again in the near future, a possibile approach is creating the VM from a volume
 (see :ref:`Creating Virtual Machines from Volumes<BootFromVolume>`). When you need to release the GPU, you can
 delete the VM but the disk will be preserved (assuming that you specified 'No' for **Delete Volume on Instance Delete** at VM creation time).
-When you need again to use a GPU, after having successfully reserved it, you can created another VM using this volume.
+When you need again to use a GPU, after having successfully reserved it, you can create another VM using this volume.
 
 
     .. WARNING ::
 
-       Since there are known issues using shelving with virtual machines with GPUs, we do NOT reccomend to use this functionality
+       Since there are known issues using shelving with virtual machines with GPUs, we do NOT recommend to use this functionality
        for releasing GPUs.
 
 
