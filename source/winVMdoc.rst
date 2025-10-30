@@ -407,7 +407,7 @@ You will connect through a jump host (a machine that can access the VM is gate.c
 
     :: 
 
-      rdesktop localhost:3389
+      rdesktop localhost:20389
 
 * From Windows (using PowerShell or Command Prompt)
 
