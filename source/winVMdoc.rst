@@ -1,8 +1,17 @@
 ..    include:: <isonum.txt>
 
+
+
+
+		
 Deploying and using Windows VMs (experimental)
 ==========================================
 
+.. IMPORTANT ::
+
+   Due to the lack of interest for this functionality, no futher developments
+   will be done with respect to the possibility to instantiate windows virtual
+   machines on CloudVeneto.
 
 
 
@@ -55,7 +64,9 @@ Configure the instance as needed (specifying the flavor, network,  etc.).
 
 .. NOTE ::
 
-   To ensure acceptable performance, it is recommended to create the VM with a flavor medium or higher.
+   You need to specify a flavor whose name ends with the "xWin" string.
+   If you can't find a flavor whose size  matches your requirements, please write
+   to support AT cloudveneto.it.
 
 
 
