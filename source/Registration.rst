@@ -382,7 +382,19 @@ to project user (by clicking on **Demote user**).
     :ref:`Manage project membership requests (only for project managers)<ManageProjectMembershipRequests>`.
 
 From this window you can also remove a specific user from the project
-you manage.
+you manage, e.g. because he/she doesn't work anymore in your group.
+
+
+.. IMPORTANT::
+
+    Please keep your project's membership list up to date, setting the appropriate expiration date (when
+    a user requests the membership or the renewal), and removing users who no longer work in your group
+    and are no longer entitled to access the resources assigned to your project.
+    Only you (the project manager) have this information. CloudVeneto administrators generally don't know it. 
+   
+
+    
+
 
 
 Project membership renewal
