@@ -55,7 +55,8 @@ Reserving a GPU
 .. _ReservingGpu:
 
 
-Before using a GPU, you need to reserve it. This can be done using a reservation 
+Before creating a VM with a GPU,
+you need to reserve it. This can be done using a reservation 
 system integrated in the dashboard.
 
 Using the Dashboard, click on **GPU Booking Calendar**.
@@ -86,6 +87,11 @@ by the other users.
 .. image:: ./images/gpu_reserve_comment.png
    :align: center
 
+
+
+Once you have reserved a GPU, you can proceed creating the relevant VM, as explained in the following
+section.
+	   
 
 .. WARNING ::
   Please note that a reservation can be at most 15 days long and you may have 
@@ -291,7 +297,7 @@ Please consider the following policies when using GPU instances:
 
 - GPU enabled flavors must be used **only** when a GPU is needed
 
-- Since there is a high request to use GPUs, please delete or shelve your
+- Since there is a high request to use GPUs, please delete your
   instance as soon as you don't need it anymore. 
   This is because virtual machines, even if 
   idle or in shutdown state, allocate resources (GPUs in particular) which 
