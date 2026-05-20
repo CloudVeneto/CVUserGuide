@@ -2,49 +2,57 @@
 
 Managing GPUs
 ================
-CloudVeneto provides **Unipd Physics Dept. and INFN Padova users** with some
-GPUs (Graphics Processing Units). These are:
+CloudVeneto provides some GPUs (Graphics Processing Units).
+In this section we describe how the GPUs allocated to the projects:
 
-   * 4 GPU Nvidia V100
-   * 12 GPU Nvidia Tesla T4
-   * 1 GPU Nvidia Quadro RTX 6000 
-   * 2 GPU Nvidia TITAN Xp
-   * 1 GPU Nvidia GeForce GTX TITAN
+* **HPC-Physics**
+* **CONVECS**  
+* **PhysicsOfData-students**
 
-The Nvidia T4 GPUs are divided in 2 sets:
-   * the first set is composed by 4 Nvidia T4 GPUs, each one coupled with 15 
-     CPU cores; 
-   * the second set is composed by 8 Nvidia T4 GPUs, each one coupled with 8 
-     CPU cores.
+can be used.
 
-     
+
 .. NOTE::
   There are actually other Nvidia GPUs integrated in CloudVeneto, but these
   are reserved to specific projects (the ones who paid for these resources).
   The instructions in this section are not relevant for these other GPUs.
 
 
-
-
-
-Using a CloudVeneto GPU means accessing a virtual machine which has
+Using a GPU means accessing a virtual machine which has
 full access and direct control of such GPU device.
 
 
 GPU instances, i.e. virtual machines which have access to one 
-or more GPUs can be created only from the **HPC-Physics** project.
-So, first of all, you need to request the affiliation to such project
+or more GPUs can be created only from the HPC-Physics / CONVECS / PhysicsOfData-students project.
+So, first of all, you need to request the affiliation to one of these projects, **if you are entitled to it**
 (see :ref:`Apply for other projects<ApplyForOtherProjects>` for
 the relevant instructions).
 
-The only exception is  for the 4 T4 GPUs with 15 CPU
-cores, that are usable also from the **PhysicsOfData-students** project.
+
+.. IMPORTANT::
+  * You can ask to be affiliated to the **HPC-Physics** project if you are a **Unipd Physics Dept. or INFN Padova user**.
+  * You can ask to be affiliated to the **CONVECS** project for **INFN related scientific activities**.
+  * You can ask to be affiliated to the **PhysicsOfData-students** project if you are a **student of the Unipd master’S degree in Physics Of Data**.  
+
+
+
+The GPUs avilable in these projects are:
+
+   * 8 GPUs RTX PRO 6000 Blackwell Server Edition (usable in the CONVECS project)
+   * 4 GPUs Nvidia V100 (usable in the HPC-Physics project)
+   * 8 GPUs Nvidia Tesla T4, each one coupled with 15 CPU cores (usable in the HPC-Physics project)
+   * 4 GPUs Nvidia Tesla T4, each one coupled with  8 CPU cores (usable in the PhysicsOfData-students and HPC-Physics projects)
+   * 1 GPU Nvidia Quadro RTX 6000 (usable in the HPC-Physics project)
+   * 2 GPUs Nvidia TITAN Xp (usable in the HPC-Physics project)
+   * 1 GPU Nvidia GeForce GTX TITAN (usable in the HPC-Physics project)
+
+     
 
 
 .. WARNING::
   Please note that the members of the **PhysicsOfData-students** project have the priority on the
   4 T4 GPUs each one coupled with 15 CPU cores.
-  Other users can use such GPUs, but they must be released within 2 days if requested by other users with higher priority.
+  Users of the HPC-Physics can use such GPUs, but they must release them within 2 days if requested by other users with higher priority.
 
 
 
@@ -115,9 +123,7 @@ To delete a reservation, you simply need to move it to the trash bin.
 .. NOTE ::
   The reservation system that has been just described, is visible only to the 
   projects
-  that have access to the GPUs (i.e. the **HPC-Physics** project and, just 
-  for 4 T4 GPUs,
-  the **PhysicsOfData-students** project)
+  that have access to the GPUs 
 
 
 Creating a GPU instance 
@@ -127,6 +133,14 @@ The instructions to create a GPU instance are the very same for
 the creation of a 'standard' virtual machine (see
 :ref:`Creating Virtual Machines<creatingvms>`). You will only have to
 pay attention to use one of these special flavors:
+
+
+- **cloudveneto.46cores470GB25+1000GB1RTX6000**
+
+  Flavor for an instance with 1 GPU Nvidia RTX PRO 6000 Blackwell Server Edition,
+  46 VCPUs, 470 GB of RAM, 25 GB of ephemeral
+  root disk space,
+  1000 GB of extra ephemeral disk space.
 
 
 - **cloudveneto.18cores50GB25GB1V100**
@@ -312,5 +326,5 @@ Please consider the following policies when using GPU instances:
   can be deleted by the Cloud administrators**.
 
 
-- The project HPC-Physics must be used **only** to instantiate virtual
+- The projects HPC-Physics and CONVECS must be used **only** to instantiate virtual
   machines with GPUs.
