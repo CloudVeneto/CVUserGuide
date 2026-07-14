@@ -21,7 +21,7 @@ in two different data centers: Padova (INFN Padova - University of Padova's
 "Dipartimento di Fisica e Astronomia"), and INFN
 Laboratori Nazionali di Legnaro (LNL).
 
-The CloudVeneto is currently based on the *Caracal* version of the OpenStack
+The CloudVeneto is currently based on the *Epoxy* version of the OpenStack
 middleware.
 
 
