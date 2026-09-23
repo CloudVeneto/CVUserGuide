@@ -2,8 +2,6 @@ Container-as-a-Service (CaaS) Platform
 =======================================
 .. _CaaS:
 
-
-
 Container-as-a-Service provides an easy way to run containerized software
 packages in the cloud. Unlike the more widely recognized Kubernetes-as-a-Service
 (KaaS) model, where users are responsible for creating and managing their
@@ -17,33 +15,32 @@ kubectl command line interface.
 
    Please be aware that our CaaS service is currently in an **experimental** phase, so some issues may arise. If you encounter any problems, we kindly ask you to report them to support@cloudveneto.it. Your feedback is invaluable for enhancing the quality of our service.
 
-   
+
 Overview
 --------
-Before accessing the platform, it is important to grasp some key concepts 
-about the architecture, usability, security, and a few limitations. We 
+Before accessing the platform, it is important to grasp some key concepts
+about the architecture, usability, security, and a few limitations. We
 assume that you already have a basic understanding of `Kubernetes <https://kubernetes.io>`__.
 
 
 OSNodes vs Nodes
 ----------------
-
 Please note that in this guide, we use the terms **OSNode** and **Node**. They both refer to the same concept, which is *the Kubernetes node*, but with some distinctions:
 
-- **OSNode** stands for **OpenStackNode** and pertains to our API for creating Kubernetes nodes as Virtual Machines within an OpenStack Cloud Infrastructure, as provided by CloudVeneto;
+- **OSNode** stands for **OpenStackNode** and pertains to our API for creating Kubernetes nodes as Virtual Machines within an OpenStack Cloud Infrastructure, as provided by CloudVeneto.
 - On the other hand, when we mention **Node**, we are referring to a Kubernetes node where the Pods run. These nodes can be instantiated either through the **OSNode API** or by using different tools and methods.
 
 
 Architecture
 ------------
-Kubernetes efficiently manages your workloads by deploying containers within pods, which are then scheduled to operate on nodes. In our CaaS, each node essentially represents a virtual machine provided within the CloudVeneto infrastructure. We refer to these nodes as **OSNodes**, which are within your administrative control but are configured by our platform. In contrast, the `control plane <https://kubernetes.io/docs/concepts/overview/components/>`__, responsible for orchestrating container deployments and managing the cluster, is completely managed by CloudVeneto.
+Kubernetes efficiently manages your workloads by deploying containers within pods, which are then scheduled to operate on nodes. In our CaaS, each node essentially represents a virtual machine provided within the CloudVeneto infrastructure. We refer to these nodes as **OSNodes**, which are within your administrative control but are configured by our platform. In contrast, the `control plane <https://kubernetes.io>`__, responsible for orchestrating container deployments and managing the cluster, is completely managed by CloudVeneto.
 
 This separation of responsibilities ensures a streamlined user experience while providing the following benefits:
 
-- Flexibility: You have the freedom to manage your nodes according to your specific requirements in terms of CPU, RAM, and storage (flavor) without to worry about their setup;
+- Flexibility: You have the freedom to manage your nodes according to your specific requirements in terms of CPU, RAM, and storage (flavor) without worrying about their setup;
 - Isolation: Your pods run on dedicated nodes, effectively creating a virtual cluster tailored to your needs;
 - Resource Sharing: You can share one or more nodes with users who belong to your CloudVeneto project;
-- Service Deployment: You can either use pre-deployed services (e.g., nginx) or deploy new ones in your own namespace.
+- Service Deployment: You can deploy new services in your own namespace having the same name as your CloudVeneto project.
 
 Please note that the OSNodes you create utilize the quota assigned to your CloudVeneto project. Therefore, the size of your virtual cluster is constrained by the available resources at any given moment. Since node creation typically
 takes just a few minutes (usually less than 5 minutes), we encourage you to create new nodes as needed but also to promptly remove them when they are no longer necessary in order to conserve cloud resources.
@@ -51,19 +48,19 @@ takes just a few minutes (usually less than 5 minutes), we encourage you to crea
 
 Security
 --------
-Running pods on your own OSNdes ensures a high level of isolation. However, Kubernetes doesn't provide complete isolation for users
+Running pods on your own OSNodes ensures a high level of isolation. However, Kubernetes doesn't provide complete isolation for users
 within the same namespace. To address this specific limitation, we have introduced integrated add-ons for Kubernetes. These enhancements include authentication
 with Keystone, along with refined authorization procedures to ensure comprehensive user and resource isolation.
 
 .. NOTE ::
 
-   Kindly be aware that pods running on **shared nodes** do not achieve full isolation as they share the same computing resources (virtual machine) and rely on the security capabilities of the  container runtime, such as Docker or Containerd.
+   Kindly be aware that pods running on **shared nodes** do not achieve full isolation as they share the same computing resources (virtual machine) and rely on the security capabilities of the container runtime, such as Docker or Containerd.
 
-   
+
 Accessing the CaaS
 -------------------
-Since our CaaS is built on Kubernetes, accessing the platform requires the correct configuration of `kubectl <https://kubernetes.io/docs/tasks/tools/>`__, the Kubernetes management client.
-For simplifying this configuration process, CloudVeneto has developed a new plugin for kubectl: **kubectl-openstack**. This plugin set up the kubeconfig file with the appropriate authentication method for Keystone (OpenStack). 
+Since our CaaS is built on Kubernetes, accessing the platform requires the correct configuration of `kubectl <https://kubernetes.io/docs/tasks/tools/install-kubectl-linux>`__, the Kubernetes management client.
+For simplifying this configuration process, CloudVeneto has developed a new plugin for kubectl: **kubectl-openstack**. This plugin sets up the kubeconfig file with the appropriate authentication method for Keystone (OpenStack).
 
 
 Configuring kubectl with the kubectl-openstack plugin
@@ -72,12 +69,12 @@ This section explains how to install and configure our plugin.
 
 Prerequisites
 ^^^^^^^^^^^^^
--  install kubectl as described in this (`guide <https://kubernetes.io/docs/tasks/tools/>`__)
+-  install kubectl as described in this (`guide <https://kubernetes.io/docs/tasks/tools/install-kubectl-linux>`__)
 -  have an OpenStack password configured through the CloudVeneto dashboard as described in this `page <https://userguide.cloudveneto.it/en/latest/GettingStarted.html#password-management>`__.
 
 Plugin installation
 ^^^^^^^^^^^^^^^^^^^
-Download `kubectl-openstack <https://confluence.infn.it/download/attachments/135594229/kubectl-openstack?version=4&modificationDate=1695203796000&api=v2>`__ (linux version), then make the file executable using the command 'chmod 755 kubectl-openstack', and finally, copy it to the directory '/usr/local/bin/.
+Download `kubectl-openstack <http://cloudveneto.it/kubectl-openstack>`__ (linux version), then make the file executable using the command 'chmod 755 kubectl-openstack', and finally, copy it to the directory '/usr/local/bin/'.
 
 Usage
 ^^^^^
@@ -85,8 +82,8 @@ To view the syntax and the list of parameters use the help:
 ::
 
     $ kubectl-openstack --help
-    Usage: kubectl-openstack [FLAG] -user=<USERNAME> -password=<PASSOWRD> -project=<PROJECT>
- 
+    Usage: kubectl-openstack [FLAG] -user=<USERNAME> -password=<PASSWORD> -project=<PROJECT>
+
     Options:
       -force
             overwrite the existing configuration
@@ -137,9 +134,10 @@ Before you can create and manage OSNodes in Kubernetes, make sure you have compl
    :align: center
 
 
+
 Creating a new OSNode
 ^^^^^^^^^^^^^^^^^^^^^
-To create a new OSNodes in your Kubernetes cluster, you'll use kubectl, the standard Kubernetes command-line interface. Specifically, you will utilize the kubectl apply command, which takes a YAML file as input.
+To create a new OSNode in your Kubernetes cluster, you'll use kubectl, the standard Kubernetes command-line interface. Specifically, you will utilize the kubectl apply command, which takes a YAML file as input.
 
 The YAML file required to create a new OSNode should follow this structure:
 
@@ -153,14 +151,14 @@ The YAML file required to create a new OSNode should follow this structure:
     spec:
       flavor: FLAVOR_NAME
       keyPair: KEYPAIR_NAME
-      policy: [shared | private ]
+      policy: shared # or private
 
 
 
 - NODE_NAME: <Unique node name>
-- FLAVOR_NAME: <CloudVeneto flavor name>
+- FLAVOR_NAME: <CloudVeneto flavor name [e.g. cloudveneto.medium, cloudveneto.large, cloudveneto.xlarge, ...]>
 - KEYPAIR_NAME: <User-defined SSH keypair name>
-- shared | private: <Choose one: shared or private> 
+- shared | private: <Choose one: shared or private>
 
 .. important ::
 
@@ -181,7 +179,7 @@ Both nodes use the same SSH keypair (my-key):
      flavor: cloudveneto.medium
      keyPair: my-key
      policy: shared
-    
+
    ---
    apiVersion: osnode.infn.it/v1
    kind: OpenStackNode
@@ -200,6 +198,7 @@ Copy and paste the above yaml code into an empty (osnode.yml) file, then execute
    $ kubectl apply -f osnode.yml
    openstacknode.osnode.infn.it/osn-01 created
    openstacknode.osnode.infn.it/osn-02 created
+
 
 
 Verifying the OSNode status
@@ -252,15 +251,20 @@ For example, to remove osn-01 and osn-02, you would run:
    openstacknode.osnode.infn.it "osn-01" deleted
    openstacknode.osnode.infn.it "osn-02" deleted
 
-
 Getting details about your OSNode
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 For more detailed information about your OSNodes, you can use the following command:
 
 ::
 
-   $ kubectl describe osn qst-gpu-01
-   # kubectl -n qst describe osn qst-gpu-01
+   $ kubectl describe osn <node_name>
+
+For example, to get details about a node named ``qst-gpu-01`` in the ``qst`` namespace:
+
+
+::
+
+   $ kubectl -n qst describe osn qst-gpu-01
    Name:         qst-gpu-01
    Namespace:    qst
    Labels:       SECRET=bootstrap-token-mqkldv
@@ -282,7 +286,7 @@ For more detailed information about your OSNodes, you can use the following comm
      Availability Zone:  nova
      Flavor:             cloudveneto.50cores249GB25GB+500GB1A
      Image:
-       Id:      
+       Id:
        Name:    almalinux9-k8s-node-26-09-2023
      Key Pair:  Lisa
      Policy:    shared
@@ -290,7 +294,7 @@ For more detailed information about your OSNodes, you can use the following comm
      Region:    regionOne
      Security Groups:
        K8S
-     User Data:  
+     User Data:
    Status:
      Created:      2023-09-27T16:29:51Z
      Description:  The node is running
@@ -306,7 +310,9 @@ For more detailed information about your OSNodes, you can use the following comm
      Updated:    2023-10-09T11:35:37Z
    Events:       <none>
 
-This can be particularly useful for troubleshooting purposes.
+
+The output showing the metadata, specifications, and running status can be useful for troubleshooting purposes.
+
 
 
 Runnind Pods on Shared Nodes
@@ -335,7 +341,7 @@ In the following example, we are requesting the execution of *dnsutils* Pod on a
          - sleep
          - "36000000"
        imagePullPolicy: IfNotPresent
-  restartPolicy: Always
+   restartPolicy: Always
 
 This annotation ensures that the pod can be scheduled on shared nodes, providing flexibility in your cluster's resource allocation.
 
@@ -343,15 +349,15 @@ This annotation ensures that the pod can be scheduled on shared nodes, providing
 
    Note that with "shared", the Kubernetes scheduler allocates resources on both private and shared nodes, and not just on shared ones. Therefore, it may still select your private node. To explicitly restrict a Pod to run on specific node(s) or prefer running on particular nodes, you can utilize any of the methods outlined in this `guide <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/>`__. For security reasons, please note that the `nodeName <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename>`__ method is not allowed.
 
-In the following example, we demonstrate how to create a Pod and request it to run on a specific node, the **glv-01-1696949601872**, associated with the **glv-01** OSNode:
+In the following example, we demonstrate how to create a Pod and request it to run on a specific node, the **osn-01-1696949601872**, associated with the **osn-01** OSNode:
 
 First, let's verify the status of the relevant OSNodes:
 ::
 
-   $ kubectl get osn -o wide osn-01
+   $ kubectl get osn -o wide
    NAME     PHASE     OWNER                 NODE ID                POLICY    PROVIDER      VM FLAVOR            VM STATUS   VM IPV4        AGE
-   glv-01   Running   zangrand-at-infn.it   glv-01-1696949601872   shared    CloudVeneto   cloudveneto.medium   ACTIVE      10.64.53.91    13d
-   glv-02   Running   zangrand-at-infn.it   glv-02-1696949605128   private   CloudVeneto   cloudveneto.medium   ACTIVE      10.64.53.251   13d
+   osn-01   Running   zangrand-at-infn.it   osn-01-1696949601872   shared    CloudVeneto   cloudveneto.medium   ACTIVE      10.64.53.91    13d
+   osn-02   Running   zangrand-at-infn.it   osn-02-1696949605128   private   CloudVeneto   cloudveneto.medium   ACTIVE      10.64.53.251   13d
 
 Now, let's create a Pod definition file (*dnsutils.yaml*) that specifies our preferences:
 ::
@@ -374,9 +380,9 @@ Now, let's create a Pod definition file (*dnsutils.yaml*) that specifies our pre
          - sleep
          - "36000000"
        imagePullPolicy: IfNotPresent
-  nodeSelector:
-    kubernetes.io/hostname: glv-01-1696949601872
-  restartPolicy: Always
+   nodeSelector:
+     kubernetes.io/hostname: osn-01-1696949601872
+   restartPolicy: Always
 
 Apply this Pod configuration to create the Pod:
 ::
@@ -389,5 +395,5 @@ You can now check the Pods to see that the dnsutils-shared Pod is running on the
 
    $ kubectl get pods -o wide
    NAME              READY   STATUS    RESTARTS   AGE   IP             NODE                   NOMINATED NODE   READINESS GATES
-   dnsutils-shared   1/1     Running   0          51m   10.244.11.42   glv-01-1696949601872   <none>           <none>
- 
+   dnsutils-shared   1/1     Running   0          51m   10.244.11.42   osn-01-1696949601872   <none>           <none>
+
