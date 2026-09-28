@@ -13,7 +13,7 @@ kubectl command line interface.
 
 .. important::
 
-   Please be aware that our CaaS service is currently in an **experimental** phase, so some issues may arise. If you encounter any problems, we kindly ask you to report them to support@cloudveneto.it. Your feedback is invaluable for enhancing the quality of our service.
+   If you encounter any problems, we kindly ask you to report them to support@cloudveneto.it. Your feedback is invaluable for enhancing the quality of our service.
 
 
 Overview
@@ -143,15 +143,15 @@ The YAML file required to create a new OSNode should follow this structure:
 
 ::
 
-    ---
-    apiVersion: osnode.infn.it/v1
-    kind: OpenStackNode
-    metadata:
-      name: NODE_NAME
-    spec:
-      flavor: FLAVOR_NAME
-      keyPair: KEYPAIR_NAME
-      policy: shared # or private
+---
+apiVersion: osnode.infn.it/v1
+kind: OpenStackNode
+metadata:
+  name: NODE_NAME
+spec:
+  flavor: FLAVOR_NAME
+  keyPair: KEYPAIR_NAME
+  policy: shared # or private
 
 
 
@@ -169,27 +169,26 @@ Both nodes use the same SSH keypair (my-key):
 
 ::
 
-   $ cat osnode.yml
-   ---
-   apiVersion: osnode.infn.it/v1
-   kind: OpenStackNode
-   metadata:
-     name: osn-01
-   spec:
-     flavor: cloudveneto.medium
-     keyPair: my-key
-     policy: shared
+$ cat osnode.yml
+---
+apiVersion: osnode.infn.it/v1
+kind: OpenStackNode
+metadata:
+  name: osn-01
+spec:
+  flavor: cloudveneto.medium
+  keyPair: my-key
+  policy: shared
 
-   ---
-   apiVersion: osnode.infn.it/v1
-   kind: OpenStackNode
-   metadata:
-     name: osn-02
-   spec:
-     flavor: cloudveneto.large
-     keyPair: my-key
-     policy: private
-
+---
+apiVersion: osnode.infn.it/v1
+kind: OpenStackNode
+metadata:
+  name: osn-02
+spec:
+  flavor: cloudveneto.large
+  keyPair: my-key
+  policy: private
 
 Copy and paste the above yaml code into an empty (osnode.yml) file, then execute the following command:
 
@@ -323,25 +322,25 @@ You can include this annotation in YAML files for various resource types, such a
 In the following example, we are requesting the execution of *dnsutils* Pod on a shared node, if one is available:
 ::
 
-   $ cat dnsutils.yaml
-   ---
-   apiVersion: v1
-   kind: Pod
-   metadata:
-     name: dnsutils-shared
-     labels:
-       app: dnsutils-shared
-     annotations:
-       osn.infn.it/policy: "shared"
-   spec:
-     containers:
-     - name: dnsutils
-       image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
-       command:
-         - sleep
-         - "36000000"
-       imagePullPolicy: IfNotPresent
-   restartPolicy: Always
+$ cat dnsutils.yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dnsutils-shared
+  labels:
+    app: dnsutils-shared
+  annotations:
+    osn.infn.it/policy: "shared"
+spec:
+  containers:
+  - name: dnsutils
+    image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
+    command:
+      - sleep
+      - "36000000"
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
 
 This annotation ensures that the pod can be scheduled on shared nodes, providing flexibility in your cluster's resource allocation.
 
@@ -362,27 +361,27 @@ First, let's verify the status of the relevant OSNodes:
 Now, let's create a Pod definition file (*dnsutils.yaml*) that specifies our preferences:
 ::
 
-   $ cat dnsutils.yaml
-   ---
-   apiVersion: v1
-   kind: Pod
-   metadata:
-     name: dnsutils-shared
-     labels:
-       app: dnsutils-shared
-     annotations:
-       osn.infn.it/policy: "shared"
-   spec:
-     containers:
-     - name: dnsutils
-       image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
-       command:
-         - sleep
-         - "36000000"
-       imagePullPolicy: IfNotPresent
-   nodeSelector:
-     kubernetes.io/hostname: osn-01-1696949601872
-   restartPolicy: Always
+$ cat dnsutils.yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dnsutils-shared
+  labels:
+    app: dnsutils-shared
+  annotations:
+    osn.infn.it/policy: "shared"
+spec:
+  containers:
+  - name: dnsutils
+    image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
+    command:
+      - sleep
+      - "36000000"
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    kubernetes.io/hostname: osn-01-1696949601872
+  restartPolicy: Always
 
 Apply this Pod configuration to create the Pod:
 ::
