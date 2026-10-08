@@ -683,7 +683,8 @@ purpose you will need:
     an instance. If public IPs are needed for your project, please
     contact support@cloudveneto.it specifying what is/are the relevant
     service(s) and the port(s) that need to be open.
-   
+    Please also note that public IP addresses are allocated
+    only if the request is deemed valid on both technical and policy grounds.
 
    
 Floating IP addresses can have their associations modified at any time,

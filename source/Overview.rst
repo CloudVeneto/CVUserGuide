@@ -32,6 +32,10 @@ The CloudVeneto infrastructure is available to the users and collaborators of th
 * Sezione di Padova
 * Laboratori Nazionali di Legnaro (LNL)
 
+.. IMPORTANT::
+
+   CloudVeneto may be used for scientific computing use cases. Any other use requires authorization.
+  
 
 You can create the  Virtual Machines (and other resources) you need on CloudVeneto or you can use the resources that someone else
 of your group has installed and configured for you.
@@ -98,6 +102,8 @@ Padova/Physics Dept. or INFN Legnaro without going through the gate machine.
 If needed, e.g. if a VM should host a service accessible from the
 Internet, such VM on the Cloud can be given a public IP. If this is
 the case please contact support@cloudveneto.it.
+Please note that public IP addresses are allocated only if the request
+is deemed valid on both technical and policy grounds.
 
 It is possible to control which services/ports can be
 accessed using the security groups (discussed :ref:`later<SecurityGroups>`) and firewalls on
