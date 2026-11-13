@@ -30,6 +30,12 @@ by this problem, the instructions reported
 
 
 
+Images and containers live on the root disk of your VM, which is usually small.
+If it runs out of space, you can move the Docker data directory onto a volume of
+your own, as explained in
+:ref:`Moving the Docker root directory to a volume<MoveDockerRoot>`.
+
+
 Orchestrating containers
 ------------------------
 If you need to orchestrate multiple containers, we suggest to use Kubernetes (K8S), which is the most popular container orchestrator.
