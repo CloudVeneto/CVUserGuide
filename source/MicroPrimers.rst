@@ -494,6 +494,8 @@ After the change restart the sshd (ssh on ubuntu 24.04) service with
 
 Formatting/resizing a volume you just attached
 ----------------------------------------------
+.. _ResizeVolume:
+
 
 We already showed on :ref:`Using (attaching) a Volume<CreateFS>` how to start using a volume you have attached to
 your VM. We will give you here some more details.
@@ -761,6 +763,172 @@ your VM boots up. You can also mount the volume anytime just issuing
 
 The system will lookup in /etc/fstab and mount the correct volume
 corresponding to the /mnt/volume1 mount point.
+
+
+Moving the Docker root directory to a volume
+--------------------------------------------
+.. _MoveDockerRoot:
+
+Docker stores everything it manages (images, container filesystems, volumes,
+networks, ...) in a single directory of the machine where it runs:
+*/var/lib/docker*, plus */var/lib/containerd* when containerd is used as the
+image store or as the container runtime. 
+On a CloudVeneto VM those directories live on the root disk, which is
+usually quite small: a handful of large images are often enough to fill it up.
+
+Instead of growing the root disk you can move that data onto a
+:ref:`volume<Volumes>`, whose size you choose yourself and that you can resize
+later on (see :ref:`Formatting/resizing a volume you just attached<ResizeVolume>`).
+The Docker documentation describes this possibility in its
+`daemon configuration overview <https://docs.docker.com/engine/daemon/#configure-the-data-directory-location>`__,
+where the relevant options are *data-root* for Docker and *root* for
+`containerd <https://containerd.io/docs/1.7/man/containerd-config.toml.5/>`__.
+
+We assume here that you already created a volume, attached it to your VM,
+formatted it and mounted it under */mnt/volume1*, and that you added the
+corresponding entry to */etc/fstab* so that the volume is mounted automatically
+at every boot (see :ref:`Using (attaching) a Volume<CreateFS>` and
+:ref:`Automatically remount volumes on reboot<RemountDisk>`).
+
+.. WARNING ::
+
+    The data is *copied*, not moved: check beforehand that the volume is large
+    enough to hold it (``du -sh /var/lib/docker /var/lib/containerd``), and
+    **do not delete the original directories** (step 9) until you are sure
+    everything works. Remember also that if the volume is not mounted when the
+    daemons start, they silently recreate an empty data directory on the root
+    disk: pay attention to step 7.
+
+1. Stop the container services, since no container must write while its data
+   is copied:
+
+   ::
+
+       $ sudo systemctl stop docker docker.socket containerd
+
+
+2. Create the directories that will host the data on the volume. Use one
+   directory per daemon and never share them with anything else:
+
+   ::
+
+       $ sudo mkdir -p /mnt/volume1/docker /mnt/volume1/containerd
+
+3. Copy the data, preserving ownership, permissions, hard links, ACLs, extended
+   attributes and timestamps. Install *rsync* with the package manager of your
+   distribution if it is missing. Take care of the trailing slash of the source,
+   which means 'copy the content of the directory':
+
+    .. NOTE ::
+
+       On a rootless Docker installation the the default data directory is
+       *~/.local/share/docker* and the configuration file is
+       *~/.config/docker/daemon.json*.
+   
+   ::
+
+       $ sudo rsync -aHAXx --numeric-ids /var/lib/docker/ /mnt/volume1/docker/
+       $ sudo rsync -aHAXx --numeric-ids /var/lib/containerd/ /mnt/volume1/containerd/
+
+4. Let SELinux know about the new location, otherwise the daemons will be
+   denied access to their own data. **This step is needed only on RH systems
+   where SELinux is active**; check it first:
+
+   ::
+
+       $ sudo getenforce
+       Enforcing
+
+   If the command is not found, or it answers *Disabled* (as on most DEB
+   systems, where SELinux is not installed or not enabled), go directly to the
+   next step. Otherwise let the new directories inherit the file context of the
+   original ones and relabel their content. The *semanage* command is provided
+   by the *policycoreutils-python-utils* package on AlmaLinux/CentOS/Fedora
+   (install it with *sudo dnf install policycoreutils-python-utils* if needed):
+
+   ::
+
+       $ sudo semanage fcontext -a -e /var/lib/docker /mnt/volume1/docker
+       $ sudo semanage fcontext -a -e /var/lib/containerd /mnt/volume1/containerd
+       $ sudo restorecon -RFv /mnt/volume1/docker /mnt/volume1/containerd
+
+5. Tell the Docker daemon where its data now lives by adding the *data-root*
+   key to its configuration file */etc/docker/daemon.json*, creating the file
+   if it does not exist. If the file already contains other options, add only
+   this key and keep the JSON syntax valid:
+
+   ::
+
+       {
+           "data-root": "/mnt/volume1/docker"
+       }
+
+   You can verify the syntax of the file before restarting the daemon with
+
+   ::
+
+       $ python3 -m json.tool /etc/docker/daemon.json
+
+
+
+6. Now edit the containerd configuration
+   file */etc/containerd/config.toml* and set the *root* key near the beginning 
+   of the file:
+
+   ::
+
+       root = "/mnt/volume1/containerd"
+
+7. Make sure the daemons are started only *after* the volume has been mounted.
+   Without this, a reboot where the volume mount is slow or failing would let
+   the daemons start on the root disk and create an empty data directory there:
+
+   ::
+
+       $ sudo mkdir -p /etc/systemd/system/docker.service.d
+       $ printf '[Unit]\nRequiresMountsFor=/mnt/volume1\n' | sudo tee /etc/systemd/system/docker.service.d/volume.conf
+       $ sudo mkdir -p /etc/systemd/system/containerd.service.d
+       $ printf '[Unit]\nRequiresMountsFor=/mnt/volume1\n' | sudo tee /etc/systemd/system/containerd.service.d/volume.conf
+
+8. Reload the systemd configuration, restart the services and check that the
+   new locations are really in effect:
+
+   ::
+
+       $ sudo systemctl daemon-reload
+       $ sudo systemctl start containerd docker
+       
+
+   Now check that everything works as expected: the daemons should start without errors, and you
+   should be able to list images and run containers.
+
+   ::
+
+       $ docker info --format 'Docker root: {{.DockerRootDir}}'
+       Docker root: /mnt/volume1/docker
+       $ sudo containerd config dump | grep '^root'
+       root = "/mnt/volume1/containerd"
+       $ sudo docker images
+       $ sudo docker run --rm hello-world
+
+
+9. **[Optional]** Once you are confident that everything works, reclaim the space taken by the
+   original copy. It is safer to rename the directories first and to delete
+   them only after a few days of normal operation:
+
+   ::
+
+       $ sudo mv /var/lib/docker /var/lib/docker.old
+       $ sudo mv /var/lib/containerd /var/lib/containerd.old
+
+       ... some days later ...
+
+       $ sudo rm -rf /var/lib/docker.old /var/lib/containerd.old
+
+From now on all the container data grows on the volume: when it runs out of
+space you simply extend the volume from the dashboard and grow its filesystem,
+as described in :ref:`Formatting/resizing a volume you just attached<ResizeVolume>`,
+without touching the root disk.
 
 Specific instructions relevant for INFN-Padova and Physics Dept. users
 ----------------------------------------------------------------------
